@@ -1,4 +1,4 @@
-# melos_managed_dependency_overrides: dcli,dcli_core,dart_console,dcli_common,dcli_terminal,settings_yaml,system_info
+# melos_managed_dependency_overrides: dart_console,dcli,dcli_common,dcli_core,dcli_terminal,settings_yaml,system_info
 dependency_overrides:
   dart_console:
     path: ../../../../../dart_console
