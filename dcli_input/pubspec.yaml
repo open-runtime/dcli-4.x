@@ -9,9 +9,8 @@ dependencies:
   meta: ^1.12.0
   validators2: ^5.0.0
   dcli_core:
-    path: ../dcli_core
   dcli_terminal:
-    path: ../dcli_terminal
+
 dev_dependencies:
   checks: ^0.3.0
   lint_hard: ^4.0.0

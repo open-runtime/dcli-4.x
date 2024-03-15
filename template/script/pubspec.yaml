@@ -1,4 +1,4 @@
-name: console_simple
+name: console_simple_template
 version: 0.0.1
 description: A simple command-line application created by dcli
 environment:

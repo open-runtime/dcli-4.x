@@ -92,35 +92,35 @@ packages:
   dart_console:
     dependency: "direct overridden"
     description:
-      path: "../../dart_console"
+      path: "../../../dart_console"
       relative: true
     source: path
     version: "1.1.2-local"
   dcli:
     dependency: "direct main"
     description:
-      path: "../dcli"
+      path: "../../dcli"
       relative: true
     source: path
     version: "4.0.1-alpha.10"
   dcli_common:
     dependency: "direct overridden"
     description:
-      path: "../dcli_common"
+      path: "../../dcli_common"
       relative: true
     source: path
     version: "4.0.1-alpha.10"
   dcli_core:
-    dependency: "direct main"
+    dependency: "direct overridden"
     description:
-      path: "../dcli_core"
+      path: "../../dcli_core"
       relative: true
     source: path
     version: "4.0.1-alpha.10"
   dcli_terminal:
-    dependency: "direct main"
+    dependency: "direct overridden"
     description:
-      path: "../dcli_terminal"
+      path: "../../dcli_terminal"
       relative: true
     source: path
     version: "4.0.1-alpha.10"
@@ -253,7 +253,7 @@ packages:
     source: hosted
     version: "1.0.5"
   path:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: path
       sha256: "087ce49c3f0dc39180befefc60fdb4acd8f8620e5682fe2476afd0b3688bb4af"
@@ -311,7 +311,7 @@ packages:
   settings_yaml:
     dependency: "direct overridden"
     description:
-      path: "../../settings_yaml"
+      path: "../../../settings_yaml"
       relative: true
     source: path
     version: "8.1.0-alpha.1"
@@ -366,7 +366,7 @@ packages:
   system_info:
     dependency: "direct overridden"
     description:
-      path: "../../system_info"
+      path: "../../../system_info"
       relative: true
     source: path
     version: "4.0.0"

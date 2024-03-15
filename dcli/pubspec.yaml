@@ -36,20 +36,14 @@ dependencies:
   yaml: ^3.1.2
   #  Overridden with MELOS
   settings_yaml:
-    path: ../../settings_yaml
   dcli_common:
-    path: ../dcli_common
   dcli_core:
-    path: ../dcli_core
   dcli_terminal:
-    path: ../dcli_terminal
   system_info:
-    path: ../../system_info
   dart_console:
-    path: ../../dart_console
+
 dev_dependencies:
   dcli_test:
-    path: ../dcli_test
   hex: ^0.2.0
   lint_hard: ^4.0.0
   mocktail: ^1.0.3

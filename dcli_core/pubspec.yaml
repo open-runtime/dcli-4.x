@@ -19,7 +19,7 @@ dependencies:
   stack_trace: ^1.11.1
   uuid: ^4.3.3
   dcli_common:
-    path: ../dcli_common
+
 dev_dependencies:
   lint_hard: ^4.0.0
   synchronized: ^3.1.0+1

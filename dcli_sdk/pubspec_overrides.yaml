@@ -1,5 +1,7 @@
-# melos_managed_dependency_overrides: dcli,dcli_common,dcli_core,dcli_terminal,dcli_test,settings_yaml,system_info
+# melos_managed_dependency_overrides: dcli,dcli_common,dcli_core,dcli_terminal,dcli_test,system_info,dart_console,settings_yaml
 dependency_overrides:
+  dart_console:
+    path: ../../dart_console
   dcli:
     path: ../dcli
   dcli_common:
