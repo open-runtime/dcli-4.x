@@ -25,11 +25,8 @@ import 'runner.dart';
 ///
 class DartScript {
   factory DartScript.createScript(
-      {required DartProject project,
-      required String scriptName,
-      required String templateName}) {
-    scriptCreator(
-        project: project, scriptName: scriptName, templateName: templateName);
+      {required DartProject project, required String scriptName, required String templateName}) {
+    scriptCreator(project: project, scriptName: scriptName, templateName: templateName);
 
     return DartScript.fromFile(join(project.pathToProjectRoot, scriptName));
   }
@@ -88,8 +85,7 @@ class DartScript {
   /// var script = DartScript.current;
   /// ```
   ///
-  DartScript.fromFile(String scriptPathTo, {DartProject? project})
-      : this._internal(scriptPathTo, project: project);
+  DartScript.fromFile(String scriptPathTo, {DartProject? project}) : this._internal(scriptPathTo, project: project);
 
   DartScript._internal(
     String pathToScript, {
@@ -195,8 +191,7 @@ class DartScript {
   /// and as such is running from the pub cache.
   bool get isPubGlobalActivated => _isPubGlobalActivated(_pathToScript);
 
-  static bool _isPubGlobalActivated(String pathToScript) =>
-      pathToScript.startsWith(PubCache().pathTo);
+  static bool _isPubGlobalActivated(String pathToScript) => pathToScript.startsWith(PubCache().pathTo);
 
   /// The current script that is running.
   static DartScript? _current;
@@ -209,8 +204,7 @@ class DartScript {
   /// it as part of the virtual projects path.
   /// For linux this just removes any leading /
   /// For windows this removes c:\
-  static String sansRoot(String path) =>
-      path.substring(p.rootPrefix(path).length);
+  static String sansRoot(String path) => path.substring(p.rootPrefix(path).length);
 
   /// Determines the script project root.
   /// The project root is defined as the directory which contains
@@ -223,8 +217,7 @@ class DartScript {
   DartProject? _project;
 
   /// the project for this scrtipt.
-  DartProject get project =>
-      _project ??= DartProject.fromPath(pathToScriptDirectory);
+  DartProject get project => _project ??= DartProject.fromPath(pathToScriptDirectory);
 
   /// used by the 'doctor' command to prints the details for this project.
   void get doctor {
@@ -286,6 +279,9 @@ class DartScript {
     if (install) {
       print('');
       print(orange('Installing $pathToExe into $pathToInstalledExe'));
+      if (!exists(dirname(pathToInstalledExe))) {
+        createDir(dirname(pathToInstalledExe), recursive: true);
+      }
       move(pathToExe, pathToInstalledExe, overwrite: true);
     }
   }
