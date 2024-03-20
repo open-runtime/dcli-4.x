@@ -21,7 +21,7 @@ jobs:
           - {
             platforms: [
               {
-                runner: macos-latest-large,
+                runner: ml_office_mac_mini,
                 refined_matrix: macos_apple_silicon,
                 name: macOS (Apple Silicon),
                 system_information: {
@@ -47,7 +47,7 @@ jobs:
                 }
               },
               {
-                runner: ubuntu-latest,
+                runner: ubuntu-latest-16-cores,
                 refined_matrix: ubuntu,
                 name: Ubuntu,
                 system_information: {
@@ -60,7 +60,7 @@ jobs:
                 }
               },
               {
-                runner: windows-latest,
+                runner: windows-latest-16-cores,
                 refined_matrix: windows,
                 name: Windows,
                 system_information: {
