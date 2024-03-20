@@ -190,7 +190,7 @@ jobs:
     name: Unit Tests ${{ matrix.config.name }}
     needs:
       - macos-apple-silicon-matrix
-    uses: ./.github/workflows/reusable-module-composition.yaml
+    uses: ./.github/workflows/reusable-package-tester.yaml
     with:
       matrix-config: ${{ needs.macos-apple-silicon-matrix.outputs.MATRIX_CONFIG }}
     secrets: inherit
@@ -199,7 +199,7 @@ jobs:
     name: Unit Tests ${{ matrix.config.name }}
     needs:
       - macos-intel-matrix
-    uses: ./.github/workflows/reusable-module-composition.yaml
+    uses: ./.github/workflows/reusable-package-tester.yaml
     with:
       matrix-config: ${{ needs.macos-intel-matrix.outputs.MATRIX_CONFIG }}
     secrets: inherit
@@ -208,7 +208,7 @@ jobs:
     name: Unit Tests ${{ matrix.config.name }}
     needs:
       - windows-matrix
-    uses: ./.github/workflows/reusable-module-composition.yaml
+    uses: ./.github/workflows/reusable-package-tester.yaml
     with:
       matrix-config: ${{ needs.windows-matrix.outputs.MATRIX_CONFIG }}
     secrets: inherit
@@ -217,7 +217,7 @@ jobs:
     name: Unit Tests ${{ matrix.config.name }}
     needs:
       - ubuntu-matrix
-    uses: ./.github/workflows/reusable-module-composition.yaml
+    uses: ./.github/workflows/reusable-package-tester.yaml
     with:
       matrix-config: ${{ needs.ubuntu-matrix.outputs.MATRIX_CONFIG }}
     secrets: inherit

@@ -85,7 +85,7 @@ class ProcessChannel {
   late final StringConversionSink splitter;
   late final ByteConversionSink decoder;
 
-// TODO: this probably need to be int arrays so
+// TODO DONE?: this probably need to be int arrays so
 // we can handly binary data.
   final List<List<int>> stdoutLines = <List<int>>[];
   final List<List<int>> stderrLines = <List<int>>[];
