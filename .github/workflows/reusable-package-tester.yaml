@@ -22,6 +22,9 @@ jobs:
       GH_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
     steps:
+      - uses: actions/checkout@v2
+      - uses: dart-lang/setup-dart@v1.3
+
       - name: Echo Default Cache Paths
         if: matrix.config.system_information.kernel_family == 'unix'
         env:
@@ -64,6 +67,7 @@ jobs:
           cd ../dcli_terminal && dart pub get
           cd ../dcli_test && dart pub get
           cd ../dcli_unit_tester && dart pub get
+          cd ../
 
       - name: Run Unit Tests for synchronous_test.dart
-        run: dart run test -r json dcli/dcli/test/src/process/process/synchronous_test.dart
+        run: dart run test -r json ./dcli/test/src/process/process/synchronous_test.dart
