@@ -7,6 +7,8 @@ library;
  * Written by Brett Sutton <bsutton@onepub.dev>, Jan 2022
  */
 
+// TODO: Platform specific unit tests
+
 import 'dart:io';
 
 import 'package:dcli/dcli.dart';
@@ -55,13 +57,11 @@ void main() {
   });
 
   test('parse status line', () {
-    expect(parseProcessLine('Name:	dart:ihserver.d'),
-        equals(('Name', 'dart:ihserver.d')));
+    expect(parseProcessLine('Name:	dart:ihserver.d'), equals(('Name', 'dart:ihserver.d')));
 
     expect(parseProcessLine('Umask:	0022'), equals(('Umask', '0022')));
 
-    expect(parseProcessLine('State:	S (sleeping)'),
-        equals(('State', 'S (sleeping)')));
+    expect(parseProcessLine('State:	S (sleeping)'), equals(('State', 'S (sleeping)')));
 
     expect(parseProcessLine('Empty:'), equals(('Empty', '')));
 
@@ -69,8 +69,7 @@ void main() {
 
     expect(parseProcessLine('NoColon'), equals(('NoColon', '')));
 
-    expect(parseProcessLine('VmSize:	 1012072 kB'),
-        equals(('VmSize', '1012072 kB')));
+    expect(parseProcessLine('VmSize:	 1012072 kB'), equals(('VmSize', '1012072 kB')));
   });
 
   // test('ProcessHelper', () {
