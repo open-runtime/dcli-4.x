@@ -70,4 +70,4 @@ jobs:
           cd ../
 
       - name: Run Unit Tests for synchronous_test.dart
-        run: dart run test -r json ./dcli/test/src/process/process/synchronous_test.dart
+        run: cd ./dcli && dart test ./test/src/process/process/synchronous_test.dart && cd ../
