@@ -55,14 +55,15 @@ jobs:
 
       - name: Run Pub Get
         run: |
+          echo $PWD && echo $(ls -la)
           cd ./dcli && dart pub get
-          && cd ../dcli_common && dart pub get
-          && cd ../dcli_core && dart pub get
-          && cd ../dcli_sdk && dart pub get
-          && cd ../dcli_input && dart pub get
-          && cd ../dcli_terminal && dart pub get
-          && cd ../dcli_test && dart pub get
-          && cd ../dcli_unit_tester && dart pub get
+          cd ../dcli_common && dart pub get
+          cd ../dcli_core && dart pub get
+          cd ../dcli_sdk && dart pub get
+          cd ../dcli_input && dart pub get
+          cd ../dcli_terminal && dart pub get
+          cd ../dcli_test && dart pub get
+          cd ../dcli_unit_tester && dart pub get
 
       - name: Run Unit Tests for synchronous_test.dart
         run: dart run test -r json dcli/dcli/test/src/process/process/synchronous_test.dart
