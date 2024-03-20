@@ -27,3 +27,10 @@ dcli/test/privileged_test
 dcli/test/privileged_test
 dcli_unit_tester/bin/dcli_unit_tester
 dcli/tool/post_release_hook/.settings_yaml
+/.idea/.gitignore
+/.idea/libraries/Dart_Packages.xml
+/.idea/libraries/Dart_SDK.xml
+/.idea/dcli.iml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/vcs.xml
