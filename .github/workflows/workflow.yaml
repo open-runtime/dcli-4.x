@@ -3,7 +3,7 @@ name: Compose, Dockerize, and Deploy Modules on all Platforms
 on:
   push:
     branches:
-      - native_synchronization
+      - aot_monorepo_compat
 
 
 concurrency:
