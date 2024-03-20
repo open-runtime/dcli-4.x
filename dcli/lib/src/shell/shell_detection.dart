@@ -94,8 +94,7 @@ class ShellDetection {
         verbose(() => 'found: $possiblePid $processName');
         shell = _shellByName(processName, possiblePid);
       } else {
-        Settings()
-            .verbose('possiblePID: $possiblePid Unable to obtain process name');
+        Settings().verbose('possiblePID: $possiblePid Unable to obtain process name');
         shell = UnknownShell.withPid(possiblePid, processName: 'unknown');
       }
 
@@ -119,6 +118,7 @@ class ShellDetection {
           shell = null;
         }
       }
+
       if (shell != null && shell.name == UnknownShell.shellName) {
         shell = null;
       }
