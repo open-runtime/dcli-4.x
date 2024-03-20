@@ -1,7 +1,5 @@
 # melos_managed_dependency_overrides: dart_console,dcli_common,dcli_core,dcli_terminal,dcli_test,settings_yaml,system_info
 dependency_overrides:
-  dart_console:
-    path: ../../dart_console
   dcli_common:
     path: ../dcli_common
   dcli_core:
@@ -10,7 +8,18 @@ dependency_overrides:
     path: ../dcli_terminal
   dcli_test:
     path: ../dcli_test
+
   settings_yaml:
-    path: ../../settings_yaml
+    git:
+      url: https://github.com/open-runtime/settings_yaml-4.x.git
+      ref: aot_monorepo_compat
+
   system_info:
-    path: ../../system_info
+    git:
+      url: https://github.com/open-runtime/system_info.git
+      ref: aot_monorepo_compat
+  dart_console:
+    git:
+      url: https://github.com/open-runtime/dart_console.git
+      ref: aot_monorepo_compat
+

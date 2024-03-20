@@ -301,8 +301,7 @@ class RunnableProcess {
           _parsed.args.insert(0, _parsed.cmd);
           _parsed.cmd = 'sudo';
         } else {
-          verbose(() =>
-              "privileged was requested but  sudo doesn't exist on the path");
+          verbose(() => "privileged was requested but  sudo doesn't exist on the path");
         }
       }
     }
@@ -376,8 +375,7 @@ class RunnableProcess {
   /// The main use is when using start(terminal:true).
   /// We don't have access to any IO so we just
   /// have to wait for things to finish.
-  int? _waitForExit(ProcessSync processSync, Progress progress,
-      {required bool nothrow}) {
+  int? _waitForExit(ProcessSync processSync, Progress progress, {required bool nothrow}) {
     final exitCode = processSync.waitForExitCode;
     (progress as ProgressImpl).exitCode = exitCode;
 
@@ -499,10 +497,8 @@ class RunnableProcess {
       (progress0 as ProgressImpl).addToStdout(utf8.decode(data!));
     }
 
-    processSync!.listenStdout(
-        (data) => (progress0 as ProgressImpl).addToStdout(utf8.decode(data)));
-    processSync!.listenStderr(
-        (data) => (progress0 as ProgressImpl).addToStderr(utf8.decode(data)));
+    processSync!.listenStdout((data) => (progress0 as ProgressImpl).addToStdout(utf8.decode(data)));
+    processSync!.listenStderr((data) => (progress0 as ProgressImpl).addToStderr(utf8.decode(data)));
 
     // Wait for the process to finish
     final exitCode = processSync!.waitForExitCode;
