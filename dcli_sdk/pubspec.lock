@@ -124,9 +124,11 @@ packages:
   dart_console:
     dependency: "direct overridden"
     description:
-      path: "../../dart_console"
-      relative: true
-    source: path
+      path: "."
+      ref: aot_monorepo_compat
+      resolved-ref: "23a36882510616ef27a21c792f74082062aea04c"
+      url: "https://github.com/open-runtime/dart_console.git"
+    source: git
     version: "1.1.2-local"
   dcli:
     dependency: "direct main"
@@ -323,6 +325,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  native_synchronization:
+    dependency: transitive
+    description:
+      name: native_synchronization
+      sha256: ff200fe0a64d733ff7d4dde2005271c297db81007604c8cd21037959858133ab
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0"
   node_preamble:
     dependency: transitive
     description:
@@ -406,9 +416,11 @@ packages:
   settings_yaml:
     dependency: "direct overridden"
     description:
-      path: "../../settings_yaml"
-      relative: true
-    source: path
+      path: "."
+      ref: aot_monorepo_compat
+      resolved-ref: "1ae1f38c87eeb41889fa64b2e9764d9134ce76f8"
+      url: "https://github.com/open-runtime/settings_yaml-4.x.git"
+    source: git
     version: "8.1.0-alpha.1"
   shelf:
     dependency: transitive
@@ -517,9 +529,11 @@ packages:
   system_info:
     dependency: "direct overridden"
     description:
-      path: "../../system_info"
-      relative: true
-    source: path
+      path: "."
+      ref: aot_monorepo_compat
+      resolved-ref: "09415329545224d37c780884f8d48e16f69e28f5"
+      url: "https://github.com/open-runtime/system_info.git"
+    source: git
     version: "4.0.0"
   term_glyph:
     dependency: transitive

@@ -10,14 +10,12 @@ dependency_overrides:
     path: ../dcli_terminal
   dcli_test:
     path: ../dcli_test
+
   settings_yaml:
     git:
       url: https://github.com/open-runtime/settings_yaml-4.x.git
       ref: aot_monorepo_compat
-  reflectable:
-    git:
-      url: https://github.com/open-runtime/reflectable.git
-      ref: aot_monorepo_compat
+
   system_info:
     git:
       url: https://github.com/open-runtime/system_info.git
@@ -26,11 +24,3 @@ dependency_overrides:
     git:
       url: https://github.com/open-runtime/dart_console.git
       ref: aot_monorepo_compat
-  docker:
-    git:
-      url: https://github.com/open-runtime/docker.git
-      ref: aot_monorepo_compat
-  pub_release:
-    git:
-      url: https://github.com/open-runtime/pub_release.git
-    ref: aot_monorepo_compat
