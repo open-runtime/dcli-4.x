@@ -58,7 +58,6 @@ jobs:
 
       - name: Run Pub Get
         run: |
-          echo $PWD && echo $(ls -la)
           cd ./dcli && dart pub get
           cd ../dcli_common && dart pub get
           cd ../dcli_core && dart pub get
