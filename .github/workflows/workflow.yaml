@@ -21,7 +21,7 @@ jobs:
           - {
             platforms: [
               {
-                runner: macos-latest-large,
+                runner: macos-13-xlarge,
                 refined_matrix: macos_apple_silicon,
                 name: macOS (Apple Silicon),
                 system_information: {
@@ -34,7 +34,7 @@ jobs:
                 }
               },
               {
-                runner: macos-latest,
+                runner: macos-13-large,
                 refined_matrix: macos_intel,
                 name: macOS (Intel),
                 system_information: {
