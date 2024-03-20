@@ -108,11 +108,9 @@ packages:
   dart_console:
     dependency: "direct overridden"
     description:
-      path: "."
-      ref: aot_monorepo_compat
-      resolved-ref: "23a36882510616ef27a21c792f74082062aea04c"
-      url: "https://github.com/open-runtime/dart_console.git"
-    source: git
+      path: "../../dart_console"
+      relative: true
+    source: path
     version: "1.1.2-local"
   dcli_common:
     dependency: "direct overridden"
@@ -175,14 +173,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.2"
-  globbing:
-    dependency: transitive
-    description:
-      name: globbing
-      sha256: "4f89cfaf6fa74c9c1740a96259da06bd45411ede56744e28017cc534a12b6e2d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0"
   http_multi_server:
     dependency: transitive
     description:
@@ -311,15 +301,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.0"
-  settings_yaml:
-    dependency: "direct overridden"
-    description:
-      path: "."
-      ref: aot_monorepo_compat
-      resolved-ref: "1ae1f38c87eeb41889fa64b2e9764d9134ce76f8"
-      url: "https://github.com/open-runtime/settings_yaml-4.x.git"
-    source: git
-    version: "8.1.0-alpha.1"
   shelf:
     dependency: transitive
     description:
@@ -408,15 +389,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
-  system_info:
-    dependency: "direct overridden"
-    description:
-      path: "."
-      ref: aot_monorepo_compat
-      resolved-ref: "09415329545224d37c780884f8d48e16f69e28f5"
-      url: "https://github.com/open-runtime/system_info.git"
-    source: git
-    version: "4.0.0"
   term_glyph:
     dependency: transitive
     description:
@@ -477,10 +449,10 @@ packages:
     dependency: transitive
     description:
       name: vm_service
-      sha256: e7d5ecd604e499358c5fe35ee828c0298a320d54455e791e9dcf73486bc8d9f0
+      sha256: a75f83f14ad81d5fe4b3319710b90dec37da0e22612326b696c9e1b8f34bbf48
       url: "https://pub.dev"
     source: hosted
-    version: "14.1.0"
+    version: "14.2.0"
   watcher:
     dependency: transitive
     description:
