@@ -5,10 +5,10 @@ packages:
     dependency: transitive
     description:
       name: archive
-      sha256: "49b1fad315e57ab0bbc15bcbb874e83116a1d78f77ebd500a4af6c9407d6b28e"
+      sha256: "22600aa1e926be775fa5fe7e6894e7fb3df9efda8891c73f70fb3262399a432d"
       url: "https://pub.dev"
     source: hosted
-    version: "3.3.8"
+    version: "3.4.10"
   args:
     dependency: "direct main"
     description:
@@ -85,48 +85,45 @@ packages:
     dependency: transitive
     description:
       name: csv
-      sha256: "016b31a51a913744a0a1655c74ff13c9379e1200e246a03d96c81c5d9ed297b5"
+      sha256: c6aa2679b2a18cb57652920f674488d89712efaf4d3fdf2e537215b35fc19d6c
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.2"
-  dart_console2:
-    dependency: transitive
+    version: "6.0.0"
+  dart_console:
+    dependency: "direct overridden"
     description:
-      name: dart_console2
-      sha256: "300833ffdd8c465d454cb5007c7f29d28ac8246af5abd922f8c490e1e87c894f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
+      path: "../../dart_console"
+      relative: true
+    source: path
+    version: "1.1.2-local"
   dcli:
     dependency: "direct main"
     description:
       path: "../dcli"
       relative: true
     source: path
-    version: "4.0.1-alpha.8"
+    version: "4.0.1-alpha.10"
   dcli_common:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: dcli_common
-      sha256: "19691ee49c3223c689c9d7405280bee057263aebc0abfa600082b51efc47cdbc"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.1-alpha.8"
+      path: "../dcli_common"
+      relative: true
+    source: path
+    version: "4.0.1-alpha.10"
   dcli_core:
     dependency: "direct main"
     description:
       path: "../dcli_core"
       relative: true
     source: path
-    version: "4.0.1-alpha.9"
+    version: "4.0.1-alpha.10"
   dcli_terminal:
     dependency: "direct main"
     description:
-      name: dcli_terminal
-      sha256: "2de93ef607e43ee0a430ea766a11d16edd501aa9dd4b6196a0af57712425b025"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.1-alpha.9"
+      path: "../dcli_terminal"
+      relative: true
+    source: path
+    version: "4.0.1-alpha.10"
   equatable:
     dependency: transitive
     description:
@@ -139,10 +136,10 @@ packages:
     dependency: transitive
     description:
       name: ffi
-      sha256: "7bf0adc28a23d395f19f3f1eb21dd7cfd1dd9f8e1c50051c069122e6853bc878"
+      sha256: "493f37e7df1804778ff3a53bd691d8692ddf69702cf4c1c1096a2e41b4779e21"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.0"
+    version: "2.1.2"
   file:
     dependency: transitive
     description:
@@ -195,18 +192,18 @@ packages:
     dependency: transitive
     description:
       name: intl
-      sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
+      sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
       url: "https://pub.dev"
     source: hosted
-    version: "0.18.1"
+    version: "0.19.0"
   js:
     dependency: transitive
     description:
       name: js
-      sha256: f2c445dce49627136094980615a031419f7f3eb393237e4ecd97ac15dea343f3
+      sha256: c1b2e9b5ea78c45e1a0788d29606ba27dc5f71f019f32ca5140f61ef071838cf
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.7"
+    version: "0.7.1"
   json2yaml:
     dependency: transitive
     description:
@@ -251,10 +248,10 @@ packages:
     dependency: transitive
     description:
       name: mime
-      sha256: e4ff8e8564c03f255408decd16e7899da1733852a9110a58fe6d1b817684a63e
+      sha256: "2e123074287cc9fd6c09de8336dae606d1ddb88d9ac47358826db698c176a1f2"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.4"
+    version: "1.0.5"
   path:
     dependency: "direct main"
     description:
@@ -267,10 +264,10 @@ packages:
     dependency: transitive
     description:
       name: pointycastle
-      sha256: "7c1e5f0d23c9016c5bbd8b1473d0d3fb3fc851b876046039509e18e0c7485f2c"
+      sha256: "43ac87de6e10afabc85c445745a7b799e04de84cebaa4fd7bf55a5e1e9604d29"
       url: "https://pub.dev"
     source: hosted
-    version: "3.7.3"
+    version: "3.7.4"
   posix:
     dependency: transitive
     description:
@@ -312,12 +309,11 @@ packages:
     source: hosted
     version: "4.1.0"
   settings_yaml:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: settings_yaml
-      sha256: "918174e22e7945385ea03fb57b1ff23bd1f29884af6911cbb02f2757f86e5d3e"
-      url: "https://pub.dev"
-    source: hosted
+      path: "../../settings_yaml"
+      relative: true
+    source: path
     version: "8.1.0-alpha.1"
   source_span:
     dependency: transitive
@@ -355,10 +351,10 @@ packages:
     dependency: transitive
     description:
       name: strings
-      sha256: "1f3db7347b8dfd9844ee7fb34883cffbe6cc723a63cb9f4a0aa19e619304b030"
+      sha256: b33f40c4dd3e597bf6d9e7f4f4dc282dad0f19b07d9f320cb5c2183859cbccf5
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0"
+    version: "3.1.1"
   sum_types:
     dependency: transitive
     description:
@@ -367,13 +363,12 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.5"
-  system_info2:
-    dependency: transitive
+  system_info:
+    dependency: "direct overridden"
     description:
-      name: system_info2
-      sha256: "65206bbef475217008b5827374767550a5420ce70a04d2d7e94d1d2253f3efc9"
-      url: "https://pub.dev"
-    source: hosted
+      path: "../../system_info"
+      relative: true
+    source: path
     version: "4.0.0"
   term_glyph:
     dependency: transitive
@@ -419,10 +414,10 @@ packages:
     dependency: transitive
     description:
       name: win32
-      sha256: "5a751eddf9db89b3e5f9d50c20ab8612296e4e8db69009788d6c8b060a84191c"
+      sha256: "8cb58b45c47dcb42ab3651533626161d6b67a2921917d8d429791f76972b3480"
       url: "https://pub.dev"
     source: hosted
-    version: "4.1.4"
+    version: "5.3.0"
   yaml:
     dependency: transitive
     description:
@@ -432,4 +427,4 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.0.0 <4.0.0"
+  dart: ">=3.3.0 <4.0.0"

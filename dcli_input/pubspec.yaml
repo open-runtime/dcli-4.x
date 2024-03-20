@@ -6,11 +6,12 @@ repository: https://github.com/onepub-dev/dcli
 environment:
   sdk: '>=3.0.0 <4.0.0'
 dependencies:
-  dcli_core: ^4.0.1-alpha.10
-  dcli_terminal: ^4.0.1-alpha.10
-  meta: ^1.9.0
+  meta: ^1.12.0
   validators2: ^5.0.0
+  dcli_core:
+  dcli_terminal:
+
 dev_dependencies:
-  checks: ^0.2.1
-  lint_hard: ^3.0.1
-  test: ^1.23.1
+  checks: ^0.3.0
+  lint_hard: ^4.0.0
+  test: ^1.25.2

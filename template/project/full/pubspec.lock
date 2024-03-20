@@ -5,10 +5,10 @@ packages:
     dependency: transitive
     description:
       name: archive
-      sha256: "06a96f1249f38a00435b3b0c9a3246d934d7dbc8183fc7c9e56989860edb99d4"
+      sha256: "22600aa1e926be775fa5fe7e6894e7fb3df9efda8891c73f70fb3262399a432d"
       url: "https://pub.dev"
     source: hosted
-    version: "3.4.4"
+    version: "3.4.10"
   args:
     dependency: "direct main"
     description:
@@ -61,18 +61,10 @@ packages:
     dependency: transitive
     description:
       name: collection
-      sha256: f092b211a4319e98e5ff58223576de6c2803db36221657b46c82574721240687
+      sha256: ee67cb0715911d28db6bf4af1026078bd6f0128b07a5f66fb2ed94ec6783c09a
       url: "https://pub.dev"
     source: hosted
-    version: "1.17.2"
-  completer_ex:
-    dependency: transitive
-    description:
-      name: completer_ex
-      sha256: "7bc3b65fb581c999891fdee0aaa3b5194b50329e0ccda28eb119ebedfec4b852"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.0"
+    version: "1.18.0"
   convert:
     dependency: transitive
     description:
@@ -93,48 +85,45 @@ packages:
     dependency: transitive
     description:
       name: csv
-      sha256: "016b31a51a913744a0a1655c74ff13c9379e1200e246a03d96c81c5d9ed297b5"
+      sha256: c6aa2679b2a18cb57652920f674488d89712efaf4d3fdf2e537215b35fc19d6c
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.2"
-  dart_console2:
-    dependency: transitive
+    version: "6.0.0"
+  dart_console:
+    dependency: "direct overridden"
     description:
-      name: dart_console2
-      sha256: "300833ffdd8c465d454cb5007c7f29d28ac8246af5abd922f8c490e1e87c894f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
+      path: "../../../../dart_console"
+      relative: true
+    source: path
+    version: "1.1.2-local"
   dcli:
     dependency: "direct main"
     description:
       path: "../../../dcli"
       relative: true
     source: path
-    version: "4.0.1-alpha.8"
+    version: "4.0.1-alpha.10"
   dcli_common:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: dcli_common
-      sha256: "19691ee49c3223c689c9d7405280bee057263aebc0abfa600082b51efc47cdbc"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.1-alpha.8"
+      path: "../../../dcli_common"
+      relative: true
+    source: path
+    version: "4.0.1-alpha.10"
   dcli_core:
     dependency: "direct main"
     description:
       path: "../../../dcli_core"
       relative: true
     source: path
-    version: "4.0.1-alpha.9"
+    version: "4.0.1-alpha.10"
   dcli_terminal:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: dcli_terminal
-      sha256: "4d68792b83da509206028b6c028353fbb5fb41cd75a694affd86e2f2016f6897"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.0"
+      path: "../../../dcli_terminal"
+      relative: true
+    source: path
+    version: "4.0.1-alpha.10"
   equatable:
     dependency: transitive
     description:
@@ -147,10 +136,10 @@ packages:
     dependency: transitive
     description:
       name: ffi
-      sha256: "7bf0adc28a23d395f19f3f1eb21dd7cfd1dd9f8e1c50051c069122e6853bc878"
+      sha256: "493f37e7df1804778ff3a53bd691d8692ddf69702cf4c1c1096a2e41b4779e21"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.0"
+    version: "2.1.2"
   file:
     dependency: transitive
     description:
@@ -159,22 +148,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.0"
-  fsm2:
+  fixnum:
     dependency: transitive
     description:
-      name: fsm2
-      sha256: "7cfc5503617e88f352f224e6715afb345bd23bd2a23e83d2b1ea977014f0111a"
+      name: fixnum
+      sha256: "25517a4deb0c03aa0f32fd12db525856438902d9c16536311e76cdc57b31d7d1"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0"
+    version: "1.1.0"
   functional_data:
     dependency: transitive
     description:
       name: functional_data
-      sha256: "950f886463a7531a3b77904e0eb89e8e06dda78c4e3f5a84686445a2290cce18"
+      sha256: aefdec4365452283b2a7cf420a3169654d51d3e9553069a22d76680d7a9d7c3d
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.0"
+    version: "1.1.1"
   glob:
     dependency: transitive
     description:
@@ -219,18 +208,18 @@ packages:
     dependency: transitive
     description:
       name: intl
-      sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
+      sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
       url: "https://pub.dev"
     source: hosted
-    version: "0.18.1"
+    version: "0.19.0"
   js:
     dependency: transitive
     description:
       name: js
-      sha256: f2c445dce49627136094980615a031419f7f3eb393237e4ecd97ac15dea343f3
+      sha256: c1b2e9b5ea78c45e1a0788d29606ba27dc5f71f019f32ca5140f61ef071838cf
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.7"
+    version: "0.7.1"
   json2yaml:
     dependency: transitive
     description:
@@ -255,22 +244,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
-  logger:
-    dependency: transitive
-    description:
-      name: logger
-      sha256: "6bbb9d6f7056729537a4309bda2e74e18e5d9f14302489cc1e93f33b3fe32cac"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.2+1"
   logging:
     dependency: transitive
     description:
       name: logging
-      sha256: "04094f2eb032cbb06c6f6e8d3607edcfcb0455e2bb6cbc010cb01171dcb64e6d"
+      sha256: "623a88c9594aa774443aa3eb2d41807a48486b5613e67599fb4c41c0ad47c340"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.1"
+    version: "1.2.0"
   meta:
     dependency: transitive
     description:
@@ -283,10 +264,10 @@ packages:
     dependency: transitive
     description:
       name: mime
-      sha256: e4ff8e8564c03f255408decd16e7899da1733852a9110a58fe6d1b817684a63e
+      sha256: "2e123074287cc9fd6c09de8336dae606d1ddb88d9ac47358826db698c176a1f2"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.4"
+    version: "1.0.5"
   path:
     dependency: "direct main"
     description:
@@ -299,10 +280,10 @@ packages:
     dependency: transitive
     description:
       name: pointycastle
-      sha256: "7c1e5f0d23c9016c5bbd8b1473d0d3fb3fc851b876046039509e18e0c7485f2c"
+      sha256: "43ac87de6e10afabc85c445745a7b799e04de84cebaa4fd7bf55a5e1e9604d29"
       url: "https://pub.dev"
     source: hosted
-    version: "3.7.3"
+    version: "3.7.4"
   posix:
     dependency: transitive
     description:
@@ -331,10 +312,10 @@ packages:
     dependency: transitive
     description:
       name: pubspec_manager
-      sha256: "0f31c01c6bd72dc7cf934f185baf3cfd6ad91e27fb8086b0f516448de58112a4"
+      sha256: "44df429f8991a13b72f2f84d1bbc6c96e12e965b66d43d5711a6070deee9875f"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.0-alpha.17"
+    version: "1.0.0-beta.1"
   scope:
     dependency: transitive
     description:
@@ -350,14 +331,6 @@ packages:
       relative: true
     source: path
     version: "8.1.0-alpha.1"
-  simple_logger:
-    dependency: transitive
-    description:
-      name: simple_logger
-      sha256: bd3f09099a890f5f66cd27a39e5422f4e27b5e7cf4c5a7331569e86d89846898
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.9.0+3"
   source_span:
     dependency: transitive
     description:
@@ -378,18 +351,10 @@ packages:
     dependency: transitive
     description:
       name: stack_trace
-      sha256: c3c7d8edb15bee7f0f74debd4b9c5f3c2ea86766fe4178eb2a18eb30a0bdaed5
+      sha256: "73713990125a6d93122541237550ee3352a2d84baad52d375a4cad2eb9b7ce0b"
       url: "https://pub.dev"
     source: hosted
-    version: "1.11.0"
-  stacktrace_impl:
-    dependency: transitive
-    description:
-      name: stacktrace_impl
-      sha256: a42791862f672151d7f5a12911bf607c5b6d600f15f4f2457ef4ec92bfcf561b
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.0"
+    version: "1.11.1"
   string_scanner:
     dependency: transitive
     description:
@@ -414,21 +379,12 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.5"
-  synchronized:
-    dependency: transitive
+  system_info:
+    dependency: "direct overridden"
     description:
-      name: synchronized
-      sha256: "5fcbd27688af6082f5abd611af56ee575342c30e87541d0245f7ff99faa02c60"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.1.0"
-  system_info2:
-    dependency: transitive
-    description:
-      name: system_info2
-      sha256: "65206bbef475217008b5827374767550a5420ce70a04d2d7e94d1d2253f3efc9"
-      url: "https://pub.dev"
-    source: hosted
+      path: "../../../../system_info"
+      relative: true
+    source: path
     version: "4.0.0"
   term_glyph:
     dependency: transitive
@@ -438,14 +394,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.1"
-  tree_iterator:
-    dependency: transitive
-    description:
-      name: tree_iterator
-      sha256: bf3e797743cbf16366c40fb481a83cd7a2a30f36240a633de27e7ef1549b8b34
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
   typed_data:
     dependency: transitive
     description:
@@ -466,10 +414,10 @@ packages:
     dependency: transitive
     description:
       name: uuid
-      sha256: b715b8d3858b6fa9f68f87d20d98830283628014750c2b09b6f516c1da4af2a7
+      sha256: cd210a09f7c18cbe5a02511718e0334de6559871052c90a90c0cca46a4aa81c8
       url: "https://pub.dev"
     source: hosted
-    version: "4.1.0"
+    version: "4.3.3"
   validators2:
     dependency: transitive
     description:
@@ -482,10 +430,10 @@ packages:
     dependency: transitive
     description:
       name: win32
-      sha256: "5a751eddf9db89b3e5f9d50c20ab8612296e4e8db69009788d6c8b060a84191c"
+      sha256: "8cb58b45c47dcb42ab3651533626161d6b67a2921917d8d429791f76972b3480"
       url: "https://pub.dev"
     source: hosted
-    version: "4.1.4"
+    version: "5.3.0"
   yaml:
     dependency: transitive
     description:
@@ -495,5 +443,4 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.0.0 <4.0.0"
-  flutter: any
+  dart: ">=3.3.0 <4.0.0"

@@ -34,11 +34,9 @@ class EntryPoint {
   }
 
   /// process the command line
-  Future<int> process(List<String> arguments) async =>
-      _parseCmdLine(arguments, Commands.applicationCommands);
+  Future<int> process(List<String> arguments) async => _parseCmdLine(arguments, Commands.applicationCommands);
 
-  Future<int> _parseCmdLine(
-      List<String> arguments, List<Command> availableCommands) async {
+  Future<int> _parseCmdLine(List<String> arguments, List<Command> availableCommands) async {
     try {
       CommandLineRunner.init(availableCommands);
       exitCode = await CommandLineRunner().process(arguments);
@@ -46,7 +44,7 @@ class EntryPoint {
       verbose(() => 'Exiting with code $exitCode');
 
       // ignore: discarded_futures
-      waitFor<void>(stderr.flush());
+      await stderr.flush();
 
       return exitCode;
     } on CommandLineException catch (e) {

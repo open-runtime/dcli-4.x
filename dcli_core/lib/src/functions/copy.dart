@@ -33,8 +33,7 @@ import '../../dcli_core.dart';
 /// The default for [overwrite] is false.
 ///
 /// If an error occurs a [CopyException] is thrown.
-void copy(String from, String to, {bool overwrite = false}) =>
-    _Copy().copy(from, to, overwrite: overwrite);
+void copy(String from, String to, {bool overwrite = false}) => _Copy().copy(from, to, overwrite: overwrite);
 
 class _Copy extends DCliFunction {
   void copy(String from, String to, {bool overwrite = false}) {
@@ -42,8 +41,7 @@ class _Copy extends DCliFunction {
     if (isDirectory(finalto)) {
       finalto = join(finalto, basename(from));
     }
-    verbose(() =>
-        'copy ${truepath(from)} -> ${truepath(finalto)} overwrite: $overwrite');
+    verbose(() => 'copy ${truepath(from)} -> ${truepath(finalto)} overwrite: $overwrite');
 
     if (overwrite == false && exists(finalto, followLinks: false)) {
       throw CopyException(
@@ -68,15 +66,19 @@ class _Copy extends DCliFunction {
       /// so in the most common case (everything is correct)
       /// we don't waste cycles on unnecessary work.
       if (isDirectory(from)) {
-        throw CopyException(
-            "The 'from' argument ${truepath(from)} is a directory. "
+        throw CopyException("The 'from' argument ${truepath(from)} is a directory. "
             'Use copyTree instead.');
       }
       if (!exists(from)) {
-        throw CopyException(
-            "The 'from' file ${truepath(from)} does not exists.");
+        throw CopyException("The 'from' file ${truepath(from)} does not exists.");
       }
       if (!exists(dirname(to))) {
+        print('[INTERNAL] to: $to');
+        print('[INTERNAL] dirname: ${dirname(to)}');
+        print('[INTERNAL] exists: ${exists(dirname(to))}');
+        print('[INTERNAL] exists parent: ${exists(dirname("/home/runner/.dcli"))}');
+        print('[INTERNAL] exists parent parent: ${exists(dirname("/home/runner/"))}');
+
         throw CopyException(
           "The 'to' directory ${truepath(dirname(to))} does not exists.",
         );
