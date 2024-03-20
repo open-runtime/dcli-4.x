@@ -162,12 +162,10 @@ class UnknownShell with ShellMixin {
   bool get isPrivilegedUser => false;
 
   @override
-  String? get loggedInUser =>
-      'root'; // handles running in Docker with no shell.
+  String? get loggedInUser => 'root'; // handles running in Docker with no shell.
 
   @override
-  String privilegesRequiredMessage(String app) =>
-      'You need to be a privileged user to run $app';
+  String privilegesRequiredMessage(String app) => 'You need to be a privileged user to run $app';
 
   @override
   Future<bool> install({bool installDart = false, bool activate = true}) async {
@@ -186,7 +184,10 @@ class UnknownShell with ShellMixin {
   String? checkInstallPreconditions() => null;
 
   @override
-  bool get isSudo => throw UnimplementedError();
+  bool get isSudo {
+    verbose(() => 'isSudo called on UnknownShell. ignored');
+    return false;
+  }
 
   @override
   void releasePrivileges() {
