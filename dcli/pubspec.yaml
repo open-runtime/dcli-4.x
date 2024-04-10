@@ -21,18 +21,19 @@ dependencies:
   glob: ^2.1.2
   ini: ^2.1.0
   logging: ^1.2.0
-  meta: ^1.12.0
+  meta: ^1.14.0
   mime: ^1.0.5
+  native_synchronization: ^0.2.0
   path: ^1.9.0
   posix: ^6.0.1
   pub_semver: ^2.1.4
   pubspec_lock: ^3.0.2
-  pubspec_manager: ^1.0.0-beta.1
+  pubspec_manager: ^1.0.0
   scope: ^4.1.0
   stack_trace: ^1.11.1
-  uuid: ^4.3.3
+  uuid: ^4.4.0
   validators2: ^5.0.0
-  win32: ^5.3.0
+  win32: ^5.4.0
   yaml: ^3.1.2
   #  Overridden with MELOS
   settings_yaml:
@@ -47,7 +48,7 @@ dev_dependencies:
   hex: ^0.2.0
   lint_hard: ^4.0.0
   mocktail: ^1.0.3
-  test: ^1.25.2
+  test: ^1.25.3
   test_api: ^0.7.0
   test_core: ^0.6.0
 executables:
