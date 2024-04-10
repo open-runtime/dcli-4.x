@@ -127,8 +127,8 @@ void regSetString(
   final pValue = TEXT(value);
 
   try {
-    _regSetValue(
-        hkey, subKey, valueName, pValue.cast(), (value.length + 1) * 2, REG_SZ,
+    _regSetValue(hkey, subKey, valueName, pValue.cast(), (value.length + 1) * 2,
+        REG_SZ,
         accessRights: accessRights);
   } finally {
     calloc.free(pValue);
@@ -196,8 +196,8 @@ void regSetDWORD(
   final pValue = calloc<Uint32>()..value = value;
 
   try {
-    _regSetValue(
-        hkey, subKey, valueName, pValue.cast(), sizeOf<Uint32>(), REG_DWORD,
+    _regSetValue(hkey, subKey, valueName, pValue.cast(), sizeOf<Uint32>(),
+        REG_DWORD,
         accessRights: accessRights);
   } finally {
     calloc.free(pValue);
@@ -241,7 +241,8 @@ void regDeleteKey(
   final pSubKey = TEXT(subKey);
 
   try {
-    final result = RegDeleteKeyEx(hkey, pSubKey, KEY_WOW64_64KEY, 0);
+    final result =
+        RegDeleteKeyEx(hkey, pSubKey, KEY_WOW64_64KEY, 0);
     if (result != ERROR_SUCCESS) {
       throw WindowsException(HRESULT_FROM_WIN32(result));
     }
@@ -289,11 +290,12 @@ String regGetExpandString(
 }) {
   late final String value;
 
-  var flags = RRF_RT_REG_SZ;
+  var flags = REG_SZ;
 
   if (expand == false) {
     // flags = RRF_NOEXPAND;
-    flags = RRF_RT_REG_EXPAND_SZ | RRF_NOEXPAND;
+    flags =
+        RRF_RT_REG_EXPAND_SZ | RRF_NOEXPAND;
   }
 
   final pResult = _regGetValue(
@@ -453,7 +455,8 @@ _RegResults _regGetValue(
 /// Sets a Windows registry key to the value pointed to by [pValue]
 /// which is of [valueSize] and type [type].
 ///
-/// [type] must be one of the standard registry types such as REG_SZ.
+/// [type] must be one of the standard registry types
+///   such as REG_SZ.
 /// [valueSize] is the size of pValue in bytes.
 /// A [WindowsException] is thrown the call falls.
 void _regSetValue(
@@ -545,7 +548,8 @@ bool regKeyExists(
   final pSubKey = TEXT(subKey);
 
   try {
-    final result = RegOpenKeyEx(hkey, pSubKey, 0, KEY_QUERY_VALUE, pOpenKey);
+    final result =
+        RegOpenKeyEx(hkey, pSubKey, 0, KEY_QUERY_VALUE, pOpenKey);
     if (result == ERROR_SUCCESS) {
       exists = true;
       RegCloseKey(pOpenKey.value);

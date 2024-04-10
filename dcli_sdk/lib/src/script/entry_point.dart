@@ -6,7 +6,6 @@
 
 // ignore_for_file: deprecated_member_use
 
-import 'dart:cli';
 import 'dart:io';
 
 import 'package:dcli/dcli.dart';
@@ -34,9 +33,11 @@ class EntryPoint {
   }
 
   /// process the command line
-  Future<int> process(List<String> arguments) async => _parseCmdLine(arguments, Commands.applicationCommands);
+  Future<int> process(List<String> arguments) async =>
+      _parseCmdLine(arguments, Commands.applicationCommands);
 
-  Future<int> _parseCmdLine(List<String> arguments, List<Command> availableCommands) async {
+  Future<int> _parseCmdLine(
+      List<String> arguments, List<Command> availableCommands) async {
     try {
       CommandLineRunner.init(availableCommands);
       exitCode = await CommandLineRunner().process(arguments);

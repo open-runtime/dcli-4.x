@@ -6,7 +6,7 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-import 'process_sync.dart';
+import '../../util/exceptions.dart';
 
 /// Internal class used to make calls to native dart methods
 /// We cache the native call sites to improve performance.
@@ -24,7 +24,7 @@ class NativeCalls {
   static final Object Function(int) _connectToPort = _initNativeConnectToPort();
 
   /// Don't really know why but we go and find the
-  /// native dart method to connect to a prot.
+  /// native dart method to connect to a port.
   static Object Function(int) _initNativeConnectToPort() {
     final functions =
         NativeApi.initializeApiDLData.cast<_DartApi>().ref.functions;
