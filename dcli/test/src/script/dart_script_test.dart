@@ -46,12 +46,13 @@ void main() {
 
   group('pathToScript', () {
     const packageName = 'dcli_unit_tester';
-    final pathToTestScript =
-        truepath(DartProject.self.pathToProjectRoot, '..', packageName, 'bin', 'dcli_unit_tester.dart');
+    final pathToTestScript = truepath(DartProject.self.pathToProjectRoot, '..',
+        packageName, 'bin', 'dcli_unit_tester.dart');
 
     test('within unit test', () {
       // within a unit test
-      expect(DartScript.self.pathToScript, truepath('test', 'src', 'script', 'dart_script_test.dart'));
+      expect(DartScript.self.pathToScript,
+          truepath('test', 'src', 'script', 'dart_script_test.dart'));
     });
 
     test('jit script', () {
@@ -63,8 +64,16 @@ void main() {
         exeName += '.exe';
       }
       chmod(pathToTestScript, permission: '740');
+
+      /// make certain the dcli_unit_tester script is in a ready to run
+      /// state.
       DartScript.fromFile(pathToTestScript).runPubGet();
-      final result = 'dart $pathToTestScript --script'.start(progress: Progress.capture(), nothrow: true).toList();
+      print(orange('pub get complete'));
+      final result = 'dart $pathToTestScript --script'
+          .start(progress: Progress.capture(), nothrow: true)
+          .toList();
+      print(orange('result'));
+      print(result);
       expect(result.length, equals(13));
       var line = 0;
       expect(result[line++], equals('basename, dcli_unit_tester'));
@@ -102,13 +111,15 @@ void main() {
         ..runPubGet()
         ..compile(workingDirectory: dirname(pathToTestScript));
 
-      final pathToCompiledScript = join(dirname(pathToTestScript), basenameWithoutExtension(pathToTestScript));
+      final pathToCompiledScript = join(dirname(pathToTestScript),
+          basenameWithoutExtension(pathToTestScript));
 
       /// check that the path and script name are what we expect.
       expect(dirname(pathToCompiledScript), equals(dirname(script.pathToExe)));
       // on windows we add .exe as the extension so compare compiled script
       // name sans the extension.
-      expect(basenameWithoutExtension(pathToCompiledScript), equals(basenameWithoutExtension(script.exeName)));
+      expect(basenameWithoutExtension(pathToCompiledScript),
+          equals(basenameWithoutExtension(script.exeName)));
 
       if (Platform.isWindows) {
         expect('.exe', equals(extension(script.exeName)));
@@ -117,13 +128,8 @@ void main() {
       expect(exists(script.pathToExe), isTrue);
 
       // run compiled script
-      final result = script.pathToExe
-          .start(progress: Progress.capture())
-          .toList()
-          .map((e) => e.replaceAll(Platform.lineTerminator, '').trim())
-          .toList();
-
-      print(result);
+      final result =
+          script.pathToExe.start(progress: Progress.capture()).toList();
 
       expect(result.length, equals(1));
       expect(result[0], equals(script.pathToExe));
@@ -137,7 +143,8 @@ void main() {
       }
       PubCache().globalActivate(packageName);
 
-      final result = '$packageName --script'.start(progress: Progress.capture()).toList();
+      final result =
+          '$packageName --script'.start(progress: Progress.capture()).toList();
 
       final dcliProjectRoot = DartProject.self.pathToProjectRoot;
       final projectRoot = join(dcliProjectRoot, '..', 'dcli_unit_tester');

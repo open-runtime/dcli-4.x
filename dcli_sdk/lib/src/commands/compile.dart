@@ -204,7 +204,7 @@ compile [--nowarmup] [--install] [--overwrite] [<script path.dart>, <script path
   }
 
   /// Compiles a globally activted
-  void compilePackage(String packageName, {String? version}) async {
+  void compilePackage(String packageName, {String? version})  {
     if (packageName.contains(separator)) {
       throw InvalidCommandArgumentException(
           'The package must not include a path.');
@@ -239,7 +239,7 @@ Run:
       pathToPackage = pathTo;
     }
 
-    await withTempDir((pathToTempPackage) async {
+     withTempDir((pathToTempPackage)  {
       /// we copy the package to a temp area so we don't
       /// contaminate the cache. Don't know if this is actually
       /// a problem..
@@ -253,7 +253,7 @@ Run:
 
       final pubspec = PubSpec.load(directory: pathToTempPackage);
 
-      for (final exe in pubspec.executables) {
+      for (final exe in pubspec.executables.list) {
         final pathToOutput =
             join(pathToTempPackage, dirname(exe.scriptPath), exe.name);
         print(green('Compiling ${exe.name}...'));

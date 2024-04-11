@@ -26,7 +26,6 @@ class DockerShell with ShellMixin, PosixShell {
       /// to check cgroups.
       const pathToCgroup = '/proc/1/cgroup';
 
-      // Add this check here to prevent throwing an exception within the read function
       if (exists(pathToCgroup)) {
         final lines = read(pathToCgroup).toList();
         for (final line in lines) {
@@ -36,13 +35,11 @@ class DockerShell with ShellMixin, PosixShell {
           }
         }
       }
-
       if (_inDocker == false) {
         /// At some point we should remove the ./dockerenv test
         /// but I'm uncertain if the cgroup method works on older containers.
         _inDocker = exists('/.dockerenv');
       }
-      // }
     }
 
     return _inDocker!;
@@ -94,7 +91,8 @@ dcli install''';
 
   // no shell so no tab completion
   @override
-  void installTabCompletion({bool quiet = false}) => throw UnsupportedError('Not supported in docker');
+  void installTabCompletion({bool quiet = false}) =>
+      throw UnsupportedError('Not supported in docker');
 
   /// Returns true if this shell supports
   /// modifying the shell's PATH
@@ -108,12 +106,14 @@ dcli install''';
   /// Appends the given path to the bash path if it isn't
   /// already on the path.
   @override
-  bool appendToPATH(String path) => throw UnsupportedError('Not supported in docker');
+  bool appendToPATH(String path) =>
+      throw UnsupportedError('Not supported in docker');
 
   /// Prepends the given path to the bash path if it isn't
   /// already on the path.
   @override
-  bool prependToPATH(String path) => throw UnsupportedError('Not supported in docker');
+  bool prependToPATH(String path) =>
+      throw UnsupportedError('Not supported in docker');
 
   /// Returns true if the dcil_complete has
   /// been installed as a bash auto completer
@@ -127,10 +127,12 @@ dcli install''';
   bool get hasStartScript => false;
 
   @override
-  String get startScriptName => throw UnsupportedError('Not supported in docker');
+  String get startScriptName =>
+      throw UnsupportedError('Not supported in docker');
 
   @override
-  String get pathToStartScript => throw UnsupportedError('Not supported in docker');
+  String get pathToStartScript =>
+      throw UnsupportedError('Not supported in docker');
 
   @override
   void addFileAssocation(String dcliPath) {

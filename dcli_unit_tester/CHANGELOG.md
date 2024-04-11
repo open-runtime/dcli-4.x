@@ -1,3 +1,27 @@
+# 4.0.1-beta.2
+- add new ask option
+
+# 4.0.1-beta.1
+## Breaking
+- fetch/fetchMulti are now async.
+
+
+Still a chunk more to do but the core 'good' paths seem to be mostly working when running processes.
+Optimistically this will get most people over the hump whilst we clean up the few remaining problems.
+
+There are still some concerns around running a process in 'terminal' or 'detached' mode and I've not done any testing (and there is a path missing) of
+getting stdin attached to the process. This is probably the remaining 'big' issue but I think I can see a path through this.
+
+Take it for a spin and let us know how you go. I will try to priorities the issues that are burning people the most.
+
+
+# 4.0.1-alpha.11
+- merged #234 from tsavo-at-pieces which provides windows support for 
+synchronous process calls. Big thanks for the work on this Tsavo!!!
+- migrated away from custom implementation of mailboxes to the native_synchronization package. Big thanks to @mraleph for his massive contributions and trial conversion of dcli to dart 3.x which most of my
+work is based off.
+
+
 # 4.0.1-alpha.8
 - fixed the sdk range for dcli_common
 - switch to activating dcli_sdk instead of dcli.
