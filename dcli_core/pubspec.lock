@@ -87,7 +87,7 @@ packages:
       path: "../dcli_common"
       relative: true
     source: path
-    version: "4.0.1-beta.2"
+    version: "4.0.1-beta.3"
   ffi:
     dependency: "direct main"
     description:

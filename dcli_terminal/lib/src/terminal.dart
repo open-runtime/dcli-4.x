@@ -106,7 +106,8 @@ class Terminal {
   /// Make certain the current line is clear and the cursor is at column 0
   /// before calling this method otherwise the alignment will not work
   /// as expected.
-  void writeLine(String text, {TextAlignment alignment = TextAlignment.left}) => _console.writeLine(text, alignment);
+  void writeLine(String text, {TextAlignment alignment = TextAlignment.left}) =>
+      _console.writeLine(text, alignment);
 
   /// Clears the current console line without moving the cursor.
   /// If you want to write over the current line then

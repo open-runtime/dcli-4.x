@@ -44,8 +44,7 @@ class EntryPoint {
 
       verbose(() => 'Exiting with code $exitCode');
 
-      // ignore: discarded_futures
-      await stderr.flush();
+      stderr.flush();
 
       return exitCode;
     } on CommandLineException catch (e) {

@@ -326,7 +326,8 @@ class RunnableProcess {
           _parsed.args.insert(0, _parsed.cmd);
           _parsed.cmd = 'sudo';
         } else {
-          verbose(() => "privileged was requested but  sudo doesn't exist on the path");
+          verbose(() =>
+              "privileged was requested but  sudo doesn't exist on the path");
         }
       }
     }
@@ -364,7 +365,8 @@ class RunnableProcess {
     late final mailboxFromPrimaryIsolate = Mailbox();
     final mailboxToPrimaryIsolate = Mailbox();
 
-    startIsolate2(processSettings, mailboxFromPrimaryIsolate, mailboxToPrimaryIsolate);
+    startIsolate2(
+        processSettings, mailboxFromPrimaryIsolate, mailboxToPrimaryIsolate);
 
     MessageResponse response;
     do {
@@ -375,7 +377,8 @@ class RunnableProcess {
         ..onStderr((payload) {
           progress.addToStderr(payload);
         })
-        ..onException((exception) => Error.throwWithStackTrace(exception, exception.stackTrace));
+        ..onException((exception) =>
+            Error.throwWithStackTrace(exception, exception.stackTrace));
     } while (response.messageType != MessageType.exitCode);
 
     response.onExit((exitCode) => progress.exitCode = exitCode);

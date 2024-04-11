@@ -3,7 +3,9 @@ import 'dart:async';
 class ProcessChannel {
   int get exitCode => throw UnimplementedError();
 
-  static ProcessChannel pipe(Stream<List<int>> stdin, StreamSink<List<int>> sink) => throw UnimplementedError();
+  static ProcessChannel pipe(
+          Stream<List<int>> stdin, StreamSink<List<int>> sink) =>
+      throw UnimplementedError();
 
   List<int> readStdout() => throw UnimplementedError();
 

@@ -91,7 +91,8 @@ dcli install''';
 
   // no shell so no tab completion
   @override
-  void installTabCompletion({bool quiet = false}) => throw UnsupportedError('Not supported in docker');
+  void installTabCompletion({bool quiet = false}) =>
+      throw UnsupportedError('Not supported in docker');
 
   /// Returns true if this shell supports
   /// modifying the shell's PATH
@@ -105,12 +106,14 @@ dcli install''';
   /// Appends the given path to the bash path if it isn't
   /// already on the path.
   @override
-  bool appendToPATH(String path) => throw UnsupportedError('Not supported in docker');
+  bool appendToPATH(String path) =>
+      throw UnsupportedError('Not supported in docker');
 
   /// Prepends the given path to the bash path if it isn't
   /// already on the path.
   @override
-  bool prependToPATH(String path) => throw UnsupportedError('Not supported in docker');
+  bool prependToPATH(String path) =>
+      throw UnsupportedError('Not supported in docker');
 
   /// Returns true if the dcil_complete has
   /// been installed as a bash auto completer
@@ -124,10 +127,12 @@ dcli install''';
   bool get hasStartScript => false;
 
   @override
-  String get startScriptName => throw UnsupportedError('Not supported in docker');
+  String get startScriptName =>
+      throw UnsupportedError('Not supported in docker');
 
   @override
-  String get pathToStartScript => throw UnsupportedError('Not supported in docker');
+  String get pathToStartScript =>
+      throw UnsupportedError('Not supported in docker');
 
   @override
   void addFileAssocation(String dcliPath) {

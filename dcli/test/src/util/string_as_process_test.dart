@@ -78,8 +78,8 @@ void main() {
 
       print(file);
 
-    /// the stream shouldn't wait for exit as we want to 
-    /// process the data after setting the stream up.
+      /// the stream shouldn't wait for exit as we want to
+      /// process the data after setting the stream up.
       final stream = await 'tail -f $file'.stream();
 
       final done = Completer<void>();

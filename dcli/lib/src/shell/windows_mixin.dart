@@ -37,7 +37,8 @@ mixin WindowsMixin {
       WindowsDCliInstaller().install(installDart: installDart);
 
   ///
-  String privilegesRequiredMessage(String app) => 'You need to be an Administrator to run $app';
+  String privilegesRequiredMessage(String app) =>
+      'You need to be an Administrator to run $app';
 
   /// Returns true if running a privileged action woulduser
   /// cause a password to be requested.
@@ -134,7 +135,8 @@ mixin WindowsMixin {
 
     withMemory<void, Uint32>(sizeOf<Uint32>(), (phToken) {
       withMemory<void, Uint32>(sizeOf<Uint32>(), (pReturnedSize) {
-        withMemory<void, _TokenElevation>(sizeOf<_TokenElevation>(), (pElevation) {
+        withMemory<void, _TokenElevation>(sizeOf<_TokenElevation>(),
+            (pElevation) {
           if (OpenProcessToken(
                 GetCurrentProcess(),
                 TOKEN_QUERY,
@@ -207,7 +209,7 @@ mixin WindowsMixin {
   /// > hello world
   /// ```
   /// https://docs.microsoft.com/en-us/windows/win32/shell/fa-file-types
-  void addFileAssociationsV2() {
+  void addFileAssociationv2() {
     // create a ProgID for dcli 'noojee.dcli'
     regSetString(HKEY_CLASSES_ROOT, '.dart', defaultRegistryValueName, 'dcli');
 
@@ -220,22 +222,29 @@ mixin WindowsMixin {
     // VSCode.dart
 
     // create a ProgID for dcli 'noojee.dcli'
-    regSetString(HKEY_CURRENT_USER, r'\Software\Classes\noojee.dcli', defaultRegistryValueName, 'dcli');
+    regSetString(HKEY_CURRENT_USER, r'\Software\Classes\noojee.dcli',
+        defaultRegistryValueName, 'dcli');
 
     // associate the .dart extension with dcli's prog id
-    regSetString(HKEY_CURRENT_USER, r'\Software\Classes\.dart', defaultRegistryValueName, 'noojee.dcli');
+    regSetString(HKEY_CURRENT_USER, r'\Software\Classes\.dart',
+        defaultRegistryValueName, 'noojee.dcli');
 
     // regSetString(HKEY_CLASSES_ROOT, r'.dart\OpenWithProgids', 'dcli.bat', '');
 
     // computer\hkey_current_user\software\classes\.dart -> default (not set)
-    regSetString(HKEY_CURRENT_USER, r'SOFTWARE\Classes\.dart\OpenWithProgids', 'noojee.dcli.dart', '');
+    regSetString(HKEY_CURRENT_USER, r'SOFTWARE\Classes\.dart\OpenWithProgids',
+        'noojee.dcli.dart', '');
 
 // computer\hkey_current_user\software\classes\.dart -> default (not set)
-    regSetString(HKEY_LOCAL_MACHINE, r'SOFTWARE\Classes\.dart', defaultRegistryValueName, 'dcli');
+    regSetString(HKEY_LOCAL_MACHINE, r'SOFTWARE\Classes\.dart',
+        defaultRegistryValueName, 'dcli');
 
     //computer\hkey_classes_root\dcli\shell\open\command
     //   -> Default C:\Users\Brett\AppData\Local\Pub\Cache\bin\dcli.bat %1 %2 %3 %4 %5 %6 %7 %8 %9
-    regSetExpandString(HKEY_CURRENT_USER, r'dcli\shell\open\command', defaultRegistryValueName,
+    regSetExpandString(
+        HKEY_CURRENT_USER,
+        r'dcli\shell\open\command',
+        defaultRegistryValueName,
         '${DCliPaths().pathToDCli}  %1 %2 %3 %4 %5 %6 %7 %8 %9');
 
     // computer\hkey_classes_root\.dart => dcli
@@ -243,18 +252,26 @@ mixin WindowsMixin {
     //, 'dcli');
 
     // [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.dart\OpenWithList]
-    regSetString(HKEY_CURRENT_USER, r'SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.dart\OpenWithList',
-        'a', 'dcli.bat');
+    regSetString(
+        HKEY_CURRENT_USER,
+        r'SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.dart\OpenWithList',
+        'a',
+        'dcli.bat');
 
     /// to do check if there is any existing MRUentries
     /// and move them down unless
     /// they are for dcli
     regSetString(
-        HKEY_CURRENT_USER, r'SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.dart', 'MRUList', 'a');
+        HKEY_CURRENT_USER,
+        r'SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.dart',
+        'MRUList',
+        'a');
 
     // [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.dart\OpenWithProgids]
     // "dcli"
-    regSetNone(HKEY_CURRENT_USER, r'SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.dart\OpenWithProgids',
+    regSetNone(
+        HKEY_CURRENT_USER,
+        r'SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.dart\OpenWithProgids',
         'dcli');
   }
 
