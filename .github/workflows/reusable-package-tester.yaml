@@ -80,10 +80,9 @@ jobs:
 
       - name: Move AOTs to Dart Pub Cache
         run: |
-          local PUB_CACHE_BIN_DIR=$PUB_CACHE_DIR/bin
-          mv ./dcli_sdk/bin/dcli $PUB_CACHE_BIN_DIR
-          mv ./dcli_sdk/bin/dcli_complete $PUB_CACHE_BIN_DIR
-          mv ./dcli_sdk/bin/dcli_install $PUB_CACHE_BIN_DIR
+          mv ./dcli_sdk/bin/dcli $PUB_CACHE_DIR/bin
+          mv ./dcli_sdk/bin/dcli_complete $PUB_CACHE_DIR/bin
+          mv ./dcli_sdk/bin/dcli_install $PUB_CACHE_DIR/bin
 
       - name: List DCLI Binaries in Pub Cache Bin
         run: |
