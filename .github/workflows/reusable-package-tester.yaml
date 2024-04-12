@@ -70,9 +70,9 @@ jobs:
 
       - name: Compile AOTs for DCLI on Unix
         run: |
-          dart compile exe ./dcli/dcli_sdk/bin/dcli.dart -o ./dcli/dcli_sdk/bin/dcli
-          dart compile exe ./dcli/dcli_sdk/bin/dcli_complete.dart -o ./dcli/dcli_sdk/bin/dcli_complete
-          dart compile exe ./dcli/dcli_sdk/bin/dcli_install.dart -o ./dcli/dcli_sdk/bin/dcli_install
+          dart compile exe ./dcli_sdk/bin/dcli.dart -o ./dcli_sdk/bin/dcli
+          dart compile exe ./dcli_sdk/bin/dcli_complete.dart -o ./dcli_sdk/bin/dcli_complete
+          dart compile exe ./dcli_sdk/bin/dcli_install.dart -o ./dcli_sdk/bin/dcli_install
 
       - name: Activate DCLI Globally from Local SDK Path
         run: |
@@ -81,9 +81,9 @@ jobs:
       - name: Move AOTs to Dart Pub Cache
         run: |
           local PUB_CACHE_BIN_DIR=$PUB_CACHE_DIR/bin
-          mv ./dcli/dcli_sdk/bin/dcli $PUB_CACHE_BIN_DIR
-          mv ./dcli/dcli_sdk/bin/dcli_complete $PUB_CACHE_BIN_DIR
-          mv ./dcli/dcli_sdk/bin/dcli_install $PUB_CACHE_BIN_DIR
+          mv ./dcli_sdk/bin/dcli $PUB_CACHE_BIN_DIR
+          mv ./dcli_sdk/bin/dcli_complete $PUB_CACHE_BIN_DIR
+          mv ./dcli_sdk/bin/dcli_install $PUB_CACHE_BIN_DIR
 
       - name: List DCLI Binaries in Pub Cache Bin
         run: |
