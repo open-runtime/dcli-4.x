@@ -20,7 +20,8 @@ void main() {
     await ask(
       'How old are you',
       defaultValue: '5',
-      customPrompt: (prompt, defaultValue, hidden) => 'AAA$prompt:$defaultValue',
+      customPrompt: (prompt, defaultValue, hidden) =>
+          'AAA$prompt:$defaultValue',
     );
     // }).send("6");
   }, skip: true);
@@ -30,7 +31,8 @@ void main() {
     () async {
       var result = await ask('How old are you', defaultValue: '5');
       print('result: $result');
-      result = await ask('How old are you', defaultValue: '5', validator: Ask.integer);
+      result = await ask('How old are you',
+          defaultValue: '5', validator: Ask.integer);
       print('result: $result');
     },
     skip: true,
@@ -55,7 +57,9 @@ void main() {
       final validator = Ask.regExp(r'^[a-zA-Z0-9_\-]+');
 
       await check(validator.validate('!')).throws<AskValidatorException>(
-        (it) => it.has((e) => e.message, red(r'Input does not match: ^[a-zA-Z0-9_\-]+')),
+        it()
+          ..has(
+              (e) => e.message, red(r'Input does not match: ^[a-zA-Z0-9_\-]+')),
       );
 
       check(await validator.validate('_')).equals('_');
@@ -80,8 +84,8 @@ void main() {
       Ask.inList(['localhost'])
     ]);
 
-    await check(validator.validate('abc'))
-        .throws<AskValidatorException>((it) => it.has((e) => e.message, red('Invalid FQDN.')));
+    await check(validator.validate('abc')).throws<AskValidatorException>(
+        it()..has((e) => e.message, red('Invalid FQDN.')));
   });
 
   test('ask.all - success', () async {
@@ -101,15 +105,16 @@ void main() {
       Ask.inList(['11', '12', '13'])
     ]);
 
-    await check(validator.validate('9')).throws<AskValidatorException>(
-        (it) => it.has((e) => e.message, red('The number must be greater than or equal to 10.')));
+    await check(validator.validate('9')).throws<AskValidatorException>(it()
+      ..has((e) => e.message,
+          red('The number must be greater than or equal to 10.')));
   });
 
   test('ask.integer - failure', () async {
     const validator = Ask.integer;
 
-    await check(validator.validate('a'))
-        .throws<AskValidatorException>((it) => it.has((e) => e.message, red('Invalid integer.')));
+    await check(validator.validate('a')).throws<AskValidatorException>(
+        it()..has((e) => e.message, red('Invalid integer.')));
 
     check(await validator.validate('9')).equals('9');
   });
@@ -122,17 +127,22 @@ void main() {
     );
 
     await check(validator.validate('http://onepub.dev'))
-        .throws<AskValidatorException>((it) => it.has((e) => e.message, red('Invalid URL.')));
+        .throws<AskValidatorException>(
+            it()..has((e) => e.message, red('Invalid URL.')));
   });
 
   test('ask.url - custom protocols', () async {
     final validator = Ask.url(protocols: ['https', 'http', 'abc']);
 
-    check(await validator.validate('https://onepub.dev')).equals('https://onepub.dev');
-    check(await validator.validate('http://onepub.dev')).equals('http://onepub.dev');
-    check(await validator.validate('abc://onepub.dev')).equals('abc://onepub.dev');
+    check(await validator.validate('https://onepub.dev'))
+        .equals('https://onepub.dev');
+    check(await validator.validate('http://onepub.dev'))
+        .equals('http://onepub.dev');
+    check(await validator.validate('abc://onepub.dev'))
+        .equals('abc://onepub.dev');
 
     await check(validator.validate('def://onepub.dev'))
-        .throws<AskValidatorException>((it) => it.has((e) => e.message, red('Invalid URL.')));
+        .throws<AskValidatorException>(
+            it()..has((e) => e.message, red('Invalid URL.')));
   });
 }

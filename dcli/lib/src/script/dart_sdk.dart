@@ -11,7 +11,7 @@ import 'package:dcli_core/dcli_core.dart' as core;
 import 'package:meta/meta.dart';
 import 'package:path/path.dart';
 import 'package:pub_semver/pub_semver.dart';
-import 'package:system_info/system_info.dart';
+import 'package:system_info2/system_info2.dart';
 
 import '../../dcli.dart';
 import '../../posix.dart' as posix;

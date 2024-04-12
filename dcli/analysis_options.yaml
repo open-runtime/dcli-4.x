@@ -2,5 +2,4 @@ include: package:lint_hard/all.yaml
     
 linter:
   rules:
-    avoid_print : false
-    lines_longer_than_80_chars: false
+    avoid_print : false 
