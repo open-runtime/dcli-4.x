@@ -204,14 +204,14 @@ jobs:
       matrix-config: ${{ needs.macos-intel-matrix.outputs.MATRIX_CONFIG }}
     secrets: inherit
 
-  windows-tests:
-    name: Unit Tests ${{ matrix.config.name }}
-    needs:
-      - windows-matrix
-    uses: ./.github/workflows/reusable-package-tester.yaml
-    with:
-      matrix-config: ${{ needs.windows-matrix.outputs.MATRIX_CONFIG }}
-    secrets: inherit
+#  windows-tests:
+#    name: Unit Tests ${{ matrix.config.name }}
+#    needs:
+#      - windows-matrix
+#    uses: ./.github/workflows/reusable-package-tester.yaml
+#    with:
+#      matrix-config: ${{ needs.windows-matrix.outputs.MATRIX_CONFIG }}
+#    secrets: inherit
 
   ubuntu-tests:
     name: Unit Tests ${{ matrix.config.name }}

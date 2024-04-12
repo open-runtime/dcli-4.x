@@ -15,9 +15,21 @@ dependency_overrides:
     path: ../dcli_terminal
 
 
-  settings_yaml:
-    path: ../../settings_yaml
+#  settings_yaml:
+#    path: ../../settings_yaml
+#  dart_console:
+#    path: ../../dart_console
+#  system_info:
+#    path: ../../system_info
   dart_console:
-    path: ../../dart_console
+    git:
+      url: https://github.com/open-runtime/dart_console.git
+      ref: aot_monorepo_compat
+  settings_yaml:
+    git:
+      url: https://github.com/open-runtime/settings_yaml-4.x.git
+      ref: aot_monorepo_compat
   system_info:
-    path: ../../system_info
+    git:
+      url: https://github.com/open-runtime/system_info.git
+      ref: aot_monorepo_compat

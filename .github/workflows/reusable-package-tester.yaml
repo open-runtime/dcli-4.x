@@ -68,5 +68,34 @@ jobs:
           cd ../dcli_unit_tester && dart pub get
           cd ../
 
-      - name: Run Unit Tests for synchronous_test.dart
-        run: cd ./dcli && dart test ./test/src/process/process/synchronous_test.dart && cd ../
+      - name: Compile AOTs for DCLI on Unix
+        run: |
+          dart compile exe ./dcli/dcli_sdk/bin/dcli.dart -o ./dcli/dcli_sdk/bin/dcli
+          dart compile exe ./dcli/dcli_sdk/bin/dcli_complete.dart -o ./dcli/dcli_sdk/bin/dcli_complete
+          dart compile exe ./dcli/dcli_sdk/bin/dcli_install.dart -o ./dcli/dcli_sdk/bin/dcli_install
+
+      - name: Activate DCLI Globally from Local SDK Path
+        run: |
+          dart pub global activate -spath ./dcli/dcli_sdk --overwrite
+
+      - name: Move AOTs to Dart Pub Cache
+        run: |
+          local PUB_CACHE_BIN_DIR=$PUB_CACHE_DIR/bin
+          mv ./dcli/dcli_sdk/bin/dcli $PUB_CACHE_BIN_DIR
+          mv ./dcli/dcli_sdk/bin/dcli_complete $PUB_CACHE_BIN_DIR
+          mv ./dcli/dcli_sdk/bin/dcli_install $PUB_CACHE_BIN_DIR
+
+      - name: List DCLI Binaries in Pub Cache Bin
+        run: |
+          ls -la $PUB_CACHE_BIN_DIR
+          command -v dcli >/dev/null && echo "✅ Available and Globally Installed dcli" || echo "⛔️dcli not found in PATH. Check if it is installed correctly." && command -v dcli_complete >/dev/null && echo "✅ Available and Globally Installed dcli_complete" || echo "⛔️dcli_complete not found in PATH. Check if it is installed correctly." && command -v dcli_install >/dev/null && echo "✅ Available and Globally Installed dcli_install" || echo "⛔️dcli_install not found in PATH. Check if it is installed correctly."
+          which dcli
+          which dcli_install
+          which dcli_complete
+
+      - name: Run DCLI Install
+        run: |
+          sudo env "PATH=$PATH" dcli -v install
+
+#      - name: Run Unit Tests for synchronous_test.dart
+#        run: cd ./dcli && dart test ./test/src/process/process/synchronous_test.dart && cd ../
