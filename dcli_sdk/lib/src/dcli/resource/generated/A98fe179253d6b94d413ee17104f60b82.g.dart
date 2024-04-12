@@ -24,8 +24,7 @@ class A98fe179253d6b94d413ee17104f60b82 extends PackedResource {
   /// to compare the checksum of the local file with
   /// this checksum
   @override
-  String get checksum =>
-      '42c13665343cc1126c8de39ed3e78a50';
+  String get checksum => '42c13665343cc1126c8de39ed3e78a50';
 
   /// <package>/resources relative path to the original resource.
   @override

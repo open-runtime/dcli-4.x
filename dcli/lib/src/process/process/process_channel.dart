@@ -14,7 +14,6 @@ class ProcessChannel {
   void writeToStdin(List<int> data) => throw UnimplementedError();
 }
 
-
 // // @dart=3.0
 
 // // ignore_for_file: constant_identifier_names
