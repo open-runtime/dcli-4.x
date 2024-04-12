@@ -76,7 +76,7 @@ jobs:
 
       - name: Activate DCLI Globally from Local SDK Path
         run: |
-          dart pub global activate -spath ./dcli/dcli_sdk --overwrite
+          dart pub global activate -spath ./dcli_sdk --overwrite
 
       - name: Move AOTs to Dart Pub Cache
         run: |
