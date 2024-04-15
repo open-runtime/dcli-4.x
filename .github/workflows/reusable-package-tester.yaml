@@ -70,19 +70,39 @@ jobs:
 
       # Compile internal scripts with pure dart - the only difference here is that these files do not start with a `#! /usr/bin/env dcli` line
       - name: Compile AOTs for DCLI on Unix
+        if: matrix.config.system_information.kernel_family == 'unix'
         run: |
           dart compile exe ./dcli_sdk/bin/dcli.internal.dart -o ./dcli_sdk/bin/dcli_internal
           dart compile exe ./dcli_sdk/bin/dcli_complete.internal.dart -o ./dcli_sdk/bin/dcli_internal_complete
           dart compile exe ./dcli_sdk/bin/dcli_install.internal.dart -o ./dcli_sdk/bin/dcli_internal_install 
 
+      - name: Compile AOTs for DCLI on [Windows]
+        if: matrix.config.system_information.kernel_family == 'windows'
+        run: |
+          dart compile exe .\dcli_sdk\bin\dcli.internal.dart -o .\dcli_sdk\bin\dcli_internal.exe
+          dart compile exe .\dcli_sdk\bin\dcli_complete.internal.dart -o .\dcli_sdk\bin\dcli_internal_complete.exe
+          dart compile exe .\dcli_sdk\bin\dcli_install.internal.dart -o .\dcli_sdk\bin\dcli_internal_install.exe
+
       # Use the internal dcli executable to compile the dcli scripts that start with `#! /usr/bin/env dcli` line
-      - name: Compile AOTs with Local Internal DCLI Binary on Unix
+      - name: Compile AOTs with Local Internal DCLI Binary on [Unix]
+        if: matrix.config.system_information.kernel_family == 'unix'
         run: |
           ./dcli_sdk/bin/dcli_internal -v compile --nowarmup -o ./dcli_sdk/bin/dcli.dart ./dcli_sdk/bin/dcli_complete.dart ./dcli_sdk/bin/dcli_install.dart
 
-      - name: Activate DCLI Globally from Local SDK Path on Unix
+      - name: Compile AOTs with Local Internal DCLI Binary on [Windows]
+        if: matrix.config.system_information.kernel_family == 'windows'
+        run: |
+          .\dcli_sdk\bin\dcli_internal -v compile --nowarmup -o .\dcli_sdk\bin\dcli.dart .\dcli_sdk\bin\dcli_complete.dart .\dcli_sdk\bin\dcli_install.dart
+
+      - name: Activate DCLI Globally from Local SDK Path on [Unix]
+        if: matrix.config.system_information.kernel_family == 'unix'
         run: |
           dart pub global activate -spath ./dcli_sdk --overwrite
+
+      - name: Activate DCLI Globally from Local SDK Path on [Windows]
+        if: matrix.config.system_information.kernel_family == 'windows'
+        run: |
+          dart pub global activate -spath .\dcli_sdk --overwrite
 
       - name: Echo DCLI Path & Version
         run: |
@@ -96,13 +116,25 @@ jobs:
 #          mv ./dcli_sdk/bin/dcli_complete $PUB_CACHE_DIR/bin
 #          mv ./dcli_sdk/bin/dcli_install $PUB_CACHE_DIR/bin
 
-      - name: Run DCLI Install
+      - name: Run DCLI Install on [Unix]
+        if: matrix.config.system_information.kernel_family == 'unix'
         run: |
           sudo env "PATH=$PATH" dcli -v install
 
-      - name: Compile and install hello_world.dart with DCLI
+      - name: Run DCLI Install on [Windows]
+        if: matrix.config.system_information.kernel_family == 'windows'
+        run: |
+          dcli -v install
+
+      - name: Compile and install hello_world.dart with DCLI on [Unix]
+        if: matrix.config.system_information.kernel_family == 'unix'
         run: |
           dcli -v compile -i --nowarmup ./dcli_sdk/bin/hello_world.dart
+
+      - name: Compile and install hello_world.dart with DCLI on [Windows]
+        if: matrix.config.system_information.kernel_family == 'windows'
+        run: |
+          dcli -v compile -i --nowarmup .\dcli_sdk\bin\hello_world.dart
 
       - name: Echo Hello World Script Path & Version
         run: |
