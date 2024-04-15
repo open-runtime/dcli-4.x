@@ -6,3 +6,4 @@ template/project/full/pubspec.lock
 **/*/.lock
 **/.dart_tool
 
+dcli_sdk/bin/dcli
