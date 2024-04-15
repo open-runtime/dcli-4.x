@@ -24,12 +24,12 @@ class A80824792d15c5dff4fe8b88b4544ed7f extends PackedResource {
   /// to compare the checksum of the local file with
   /// this checksum
   @override
-  String get checksum =>
-      'f05c254fa6eb54eb0edb1d03a364fec4';
+  String get checksum => 'f05c254fa6eb54eb0edb1d03a364fec4';
 
   /// <package>/resources relative path to the original resource.
   @override
-  String get originalPath => 'template/project/full/lib/src/args/global_args.dart';
+  String get originalPath =>
+      'template/project/full/lib/src/args/global_args.dart';
 
   @override
   String get content => '''

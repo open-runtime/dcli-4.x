@@ -234,7 +234,6 @@ class RunnableProcess {
     return progress;
   }
 
-
   /// Starts a process  provides additional options to [run].
   ///
   /// This is an internal function and should not be exposed.

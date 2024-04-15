@@ -94,9 +94,12 @@ class DartSdk {
   int get versionMinor => getVersion().minor;
 
   /// From 2.10 onwards we use the dart compile option rather than dart2native.
+  bool get useDartCommand =>
+      getVersion().compareTo(Version.parse('2.10.0')) >= 0;
 
   // from 2.16 onward the doc command was migrated into dart.
-  bool get useDartDocCommand => getVersion().compareTo(Version.parse('2.16.0')) < 0;
+  bool get useDartDocCommand =>
+      getVersion().compareTo(Version.parse('2.16.0')) < 0;
 
   /// Returns the DartSdk's version
   Version getVersion() {
@@ -312,7 +315,8 @@ class DartSdk {
     if (useDartDocCommand) {
       final w = which('dartdoc');
       if (w.notfound) {
-        throw DCliException("Unable to run 'dartdoc' as the exe is not on your path");
+        throw DCliException(
+            "Unable to run 'dartdoc' as the exe is not on your path");
       }
       startFromArgs(
         w.path!,
@@ -431,7 +435,8 @@ class DartSdk {
   /// install path and can modifiy it if desired.
   ///
   /// returns the directory where the dartSdk was installed.
-  Future<String> installFromArchive(String defaultDartSdkPath, {bool askUser = true}) async {
+  Future<String> installFromArchive(String defaultDartSdkPath,
+      {bool askUser = true}) async {
     // verbose(() => 'Architecture: ${SysInfo.kernelArchitecture}');
     final zipRelease = await _fetchDartSdk();
 
@@ -455,7 +460,8 @@ class DartSdk {
           ///
           deleteDir(installDir);
         } else {
-          throw InstallException('Install Directory $installDir already exists.');
+          throw InstallException(
+              'Install Directory $installDir already exists.');
         }
       }
     });
@@ -542,7 +548,8 @@ class DartSdk {
       } else if (architecture == ProcessorArchitecture.x86_64) {
         return 'x64';
       }
-      throw OSError('${SysInfo.rawKernelArchitecture} is not a supported architecture.');
+      throw OSError(
+          '${SysInfo.rawKernelArchitecture} is not a supported architecture.');
     }
   }
 
@@ -603,7 +610,8 @@ class DartSdk {
         '${EnumHelper().getName(progress.status).padRight(15)}${Format().bytesAsReadable(progress.downloaded)}/${Format().bytesAsReadable(progress.length)} $percentage',
       );
     } else {
-      if (_progressSuppressor % 1000 == 0 || progress.status == FetchStatus.complete) {
+      if (_progressSuppressor % 1000 == 0 ||
+          progress.status == FetchStatus.complete) {
         print(
           '${EnumHelper().getName(progress.status).padRight(15)}${Format().bytesAsReadable(progress.downloaded)}/${Format().bytesAsReadable(progress.length)} $percentage',
         );
@@ -627,7 +635,8 @@ class DartSdk {
   /// Run dart pub global activate for a package located in [path]
   /// relative to the current directory.
   @Deprecated('Use PubCache().globalActivateFromSource')
-  void globalActivateFromPath(String path) => PubCache().globalActivateFromSource(path);
+  void globalActivateFromPath(String path) =>
+      PubCache().globalActivateFromSource(path);
 
   /// Run dart pub global deactivate on the given [package].
   @Deprecated('Use PubCache().globalDeactivate')
@@ -635,12 +644,14 @@ class DartSdk {
 
   /// returns true if the given package has been globally activated
   @Deprecated('Use PubCache().isGloballyActivated')
-  bool isPackageGloballyActivated(String package) => PubCache().isGloballyActivated(package);
+  bool isPackageGloballyActivated(String package) =>
+      PubCache().isGloballyActivated(package);
 
   /// Run dart pub global activate for a package located in [path]
   /// relative to the current directory.
   @Deprecated('Use PubCache().isGloballyActivatedFromSource')
-  void isPackageGlobalActivateFromPath(String path) => PubCache().isGloballyActivatedFromSource(path);
+  void isPackageGlobalActivateFromPath(String path) =>
+      PubCache().isGloballyActivatedFromSource(path);
 
   String? _determineDartPath() {
     var path = which('dart').path;
@@ -732,5 +743,6 @@ void setPathToDartSdk(String dartSdkPath) {
 /// Throw if pubspec.yaml was not found.
 class PubspecNotFoundException extends DCliException {
   /// Throw if pubspec.yaml was not found in [workingDirectory]
-  PubspecNotFoundException(String workingDirectory) : super('pubspec.yaml not found in $workingDirectory');
+  PubspecNotFoundException(String workingDirectory)
+      : super('pubspec.yaml not found in $workingDirectory');
 }
