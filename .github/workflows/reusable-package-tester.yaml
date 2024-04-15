@@ -84,6 +84,11 @@ jobs:
         run: |
           dart pub global activate -spath ./dcli_sdk --overwrite
 
+      - name: Echo DCLI Path & Version
+        run: |
+          echo $(which dcli)
+          echo $(dcli)
+
 # No longer need to move manually as we are using dcli compile -i to automatically install compiled scripts
 #      - name: Move AOTs to Dart Pub Cache
 #        run: |
