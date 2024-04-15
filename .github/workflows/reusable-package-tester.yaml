@@ -73,8 +73,7 @@ jobs:
         run: |
           dart compile exe ./dcli_sdk/bin/dcli.internal.dart -o ./dcli_sdk/bin/dcli_internal
           dart compile exe ./dcli_sdk/bin/dcli_complete.internal.dart -o ./dcli_sdk/bin/dcli_internal_complete
-          dart compile exe ./dcli_sdk/bin/dcli_install.internal.dart -o ./dcli_sdk/bin/dcli_internal_install
-           
+          dart compile exe ./dcli_sdk/bin/dcli_install.internal.dart -o ./dcli_sdk/bin/dcli_internal_install 
 
       # Use the internal dcli executable to compile the dcli scripts that start with `#! /usr/bin/env dcli` line
       - name: Compile AOTs with Local Internal DCLI Binary on Unix
@@ -85,7 +84,12 @@ jobs:
         run: |
           dart pub global activate -spath ./dcli_sdk --overwrite
 
-        # No longer need to move manually as we are using dcli compile -i to automatically install compiled scripts
+# No longer need to move manually as we are using dcli compile -i to automatically install compiled scripts
+#      - name: Move AOTs to Dart Pub Cache
+#        run: |
+#          mv ./dcli_sdk/bin/dcli $PUB_CACHE_DIR/bin
+#          mv ./dcli_sdk/bin/dcli_complete $PUB_CACHE_DIR/bin
+#          mv ./dcli_sdk/bin/dcli_install $PUB_CACHE_DIR/bin
 
       - name: Run DCLI Install
         run: |
