@@ -94,7 +94,6 @@ class DartSdk {
   int get versionMinor => getVersion().minor;
 
   /// From 2.10 onwards we use the dart compile option rather than dart2native.
-  bool get useDartCommand => getVersion().compareTo(Version.parse('2.10.0')) >= 0;
 
   // from 2.16 onward the doc command was migrated into dart.
   bool get useDartDocCommand => getVersion().compareTo(Version.parse('2.16.0')) < 0;
