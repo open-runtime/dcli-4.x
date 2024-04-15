@@ -29,3 +29,7 @@ dependency_overrides:
     git:
       url: https://github.com/open-runtime/system_info.git
       ref: aot_monorepo_compat
+  pubspec_manager:
+    git:
+      url: https://github.com/open-runtime/pubspec_manager.git
+      ref: aot_monorepo_compat

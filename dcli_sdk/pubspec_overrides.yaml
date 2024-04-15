@@ -4,7 +4,6 @@ dependency_overrides:
     path: ../dcli
   dcli_core:
     path: ../dcli_core
-
   dcli_test:
     path: ../dcli_test
 
@@ -13,8 +12,6 @@ dependency_overrides:
 
   dcli_terminal:
     path: ../dcli_terminal
-
-
 #  settings_yaml:
 #    path: ../../settings_yaml
 #  dart_console:

@@ -6,3 +6,4 @@ dependency_overrides:
     git:
       url: https://github.com/open-runtime/dart_console.git
       ref: aot_monorepo_compat
+
