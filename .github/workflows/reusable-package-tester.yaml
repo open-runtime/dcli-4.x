@@ -102,7 +102,7 @@ jobs:
 
       - name: Compile and install hello_world.dart with DCLI
         run: |
-          dcli -v compile -i --nowarmup ./example/hello_world.dart
+          dcli -v compile -i --nowarmup ./dcli_sdk/bin/hello_world.dart
 
       - name: Echo Hello World Script Path & Version
         run: |
