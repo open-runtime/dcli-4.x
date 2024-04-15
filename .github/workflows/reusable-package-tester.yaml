@@ -100,5 +100,14 @@ jobs:
         run: |
           sudo env "PATH=$PATH" dcli -v install
 
+      - name: Compile and install hello_world.dart with DCLI
+        run: |
+          dcli -v compile -i --nowarmup ./example/hello_world.dart
+
+      - name: Echo Hello World Script Path & Version
+        run: |
+          echo $(which hello_world)
+          echo $(hello_world)
+
 #      - name: Run Unit Tests for synchronous_test.dart
 #        run: cd ./dcli && dart test ./test/src/process/process/synchronous_test.dart && cd ../
