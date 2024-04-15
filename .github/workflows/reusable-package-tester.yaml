@@ -68,29 +68,23 @@ jobs:
           cd ../dcli_unit_tester && dart pub get
           cd ../
 
+      # Compile internal scripts with pure dart - the only difference here is that these files do not start with a `#! /usr/bin/env dcli` line
       - name: Compile AOTs for DCLI on Unix
         run: |
-          dart compile exe ./dcli_sdk/bin/dcli.dart -o ./dcli_sdk/bin/dcli
-          dart compile exe ./dcli_sdk/bin/dcli_complete.dart -o ./dcli_sdk/bin/dcli_complete
-          dart compile exe ./dcli_sdk/bin/dcli_install.dart -o ./dcli_sdk/bin/dcli_install
+          dart compile exe ./dcli_sdk/bin/dcli.internal.dart -o ./dcli_sdk/bin/dcli_internal
+          dart compile exe ./dcli_sdk/bin/dcli_complete.internal.dart -o ./dcli_sdk/bin/dcli_internal_complete
+          dart compile exe ./dcli_sdk/bin/dcli_install.internal.dart -o ./dcli_sdk/bin/dcli_internal_install
+
+      # Use the internal dcli executable to compile the dcli scripts that start with `#! /usr/bin/env dcli` line
+      - name: Compile AOTs with Local Internal DCLI Binary
+        run: |
+          ./dcli_sdk/bin/dcli_internal -v compile -i --nowarmup -o ./dcli_sdk/bin/dcli.dart ./dcli_sdk/bin/dcli_complete.dart ./dcli_sdk/bin/dcli_install.dart
 
       - name: Activate DCLI Globally from Local SDK Path
         run: |
           dart pub global activate -spath ./dcli_sdk --overwrite
 
-      - name: Move AOTs to Dart Pub Cache
-        run: |
-          mv ./dcli_sdk/bin/dcli $PUB_CACHE_DIR/bin
-          mv ./dcli_sdk/bin/dcli_complete $PUB_CACHE_DIR/bin
-          mv ./dcli_sdk/bin/dcli_install $PUB_CACHE_DIR/bin
-
-      - name: List DCLI Binaries in Pub Cache Bin
-        run: |
-          ls -la $PUB_CACHE_BIN_DIR
-          command -v dcli >/dev/null && echo "✅ Available and Globally Installed dcli" || echo "⛔️dcli not found in PATH. Check if it is installed correctly." && command -v dcli_complete >/dev/null && echo "✅ Available and Globally Installed dcli_complete" || echo "⛔️dcli_complete not found in PATH. Check if it is installed correctly." && command -v dcli_install >/dev/null && echo "✅ Available and Globally Installed dcli_install" || echo "⛔️dcli_install not found in PATH. Check if it is installed correctly."
-          which dcli
-          which dcli_install
-          which dcli_complete
+        # No longer need to move manually as we are using dcli compile -i to automatically install compiled scripts
 
       - name: Run DCLI Install
         run: |
