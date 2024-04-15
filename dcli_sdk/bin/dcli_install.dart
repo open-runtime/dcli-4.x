@@ -1,4 +1,6 @@
-#! /usr/bin/env dcli
+// When compiling through the standard dart exe command these comments may be problematic
+// See https://github.com/flutter/flutter/issues/65021 and https://github.com/onepub-dev/dcli/discussions/233#discussioncomment-9123341
+// #! /usr/bin/env dcli
 /* Copyright (C) S. Brett Sutton - All Rights Reserved
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
