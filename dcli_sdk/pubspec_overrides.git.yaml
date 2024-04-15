@@ -1,21 +1,23 @@
-# melos_managed_dependency_overrides: dart_console,settings_yaml,system_info
-dependency_overrides: 
-  dcli_core: 
+# melos_managed_dependency_overrides: dart_console,system_info
+dependency_overrides:
+  dcli:
+    path: ../dcli
+  dcli_core:
     path: ../dcli_core
   dcli_test:
     path: ../dcli_test
+
   dcli_common:
     path: ../dcli_common
+
   dcli_terminal:
     path: ../dcli_terminal
-#  dart_console:
-#    path: ../../dart_console
 #  settings_yaml:
 #    path: ../../settings_yaml
+#  dart_console:
+#    path: ../../dart_console
 #  system_info:
 #    path: ../../system_info
-# pubspec_manager:
-#   path: ../../pubspec_manager
   dart_console:
     git:
       url: https://github.com/open-runtime/dart_console.git
@@ -27,8 +29,4 @@ dependency_overrides:
   system_info:
     git:
       url: https://github.com/open-runtime/system_info.git
-      ref: aot_monorepo_compat
-  pubspec_manager:
-    git:
-      url: https://github.com/open-runtime/pubspec_manager.git
       ref: aot_monorepo_compat

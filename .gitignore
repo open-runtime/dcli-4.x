@@ -2,5 +2,7 @@
 template/script/pubspec.lock
 template/project/full/pubspec.lock
 *.lock
-*.lock
-*.lock
+*.iml
+**/*/.lock
+**/.dart_tool
+
