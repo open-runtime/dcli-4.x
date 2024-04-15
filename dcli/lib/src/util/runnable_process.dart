@@ -195,6 +195,7 @@ class RunnableProcess {
         terminal: terminal,
         privileged: privileged,
         extensionSearch: extensionSearch,
+        nothrow: nothrow,
         progress: progress as ProgressImpl,
       );
       // if (terminal == true) {
@@ -233,42 +234,6 @@ class RunnableProcess {
     return progress;
   }
 
-  Progress runV2({
-    required bool terminal,
-    Progress? progress,
-    bool runInShell = false,
-    bool detached = false,
-    bool privileged = false,
-    bool nothrow = false,
-    bool extensionSearch = true,
-  }) {
-    progress ??= Progress.print();
-
-    try {
-      ProcessSettings(
-        cmdLine,
-        runInShell: runInShell,
-        detached: detached,
-        terminal: terminal,
-        privileged: privileged,
-        extensionSearch: extensionSearch,
-      );
-      if (terminal == true) {
-        /// we can't process io as the terminal
-        // has inherited the IO so we dont' see it.
-        // _waitForExit(processSync!, progress, nothrow: nothrow);
-      } else {
-        if (detached == false) {
-          processUntilExit(progress, nothrow: nothrow);
-        }
-        // else we are detached and won't see the child exit
-        // so no point waiting.
-      }
-    } finally {
-      (progress as ProgressImpl).close();
-    }
-    return progress;
-  }
 
   /// Starts a process  provides additional options to [run].
   ///
@@ -293,6 +258,7 @@ class RunnableProcess {
   /// but we don't wait for it to complete nor is any io available.
   void start({
     required ProgressImpl progress,
+    bool nothrow = false,
     bool runInShell = false,
     bool detached = false,
     bool waitForStart = true,
@@ -381,7 +347,21 @@ class RunnableProcess {
             Error.throwWithStackTrace(exception, exception.stackTrace));
     } while (response.messageType != MessageType.exitCode);
 
-    response.onExit((exitCode) => progress.exitCode = exitCode);
+    response.onExit((exitCode) {
+      if (exitCode != 0 && nothrow == false) {
+        throw RunException.withArgs(
+          _parsed.cmd,
+          _parsed.args,
+          exitCode,
+          'The command '
+          '${red('[${_parsed.cmd}] with args [${_parsed.args.join(', ')}]')} '
+          'failed with exitCode: $exitCode '
+          'workingDirectory: $workingDirectory',
+        );
+      } else {
+        progress.exitCode = exitCode;
+      }
+    });
 
     // // we wait for the process to start.
     // // if the start fails we get a clean exception
