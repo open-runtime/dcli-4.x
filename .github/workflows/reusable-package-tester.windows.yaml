@@ -81,7 +81,7 @@ jobs:
           echo $env:DCLI_BIN_DIR
           echo $env:PATH
           Get-Command dcli
-          Get-Command dcli_sdk
+          (Get-Command dcli).Source
           echo (Join-Path $env:DCLI_BIN_DIR 'dcli')
           echo dcli
 

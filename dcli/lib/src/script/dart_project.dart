@@ -30,8 +30,7 @@ part 'dart_project_creator.dart';
 class DartProject {
   /// Create a dart project on the file system at
   /// [pathTo] from the template named [templateName].
-  factory DartProject.create(
-      {required String pathTo, required String templateName}) {
+  factory DartProject.create({required String pathTo, required String templateName}) {
     _createProject(pathTo, templateName);
     return DartProject.fromPath(pathTo, search: false);
   }
@@ -55,8 +54,7 @@ class DartProject {
   /// Set [search] to false if you don't want to search up the
   /// directory tree for a pubspec.yaml.
   DartProject.fromPath(String pathToSearchFrom, {bool search = true}) {
-    _pathToProjectRoot =
-        _findProject(pathToSearchFrom, search: search) ?? pathToSearchFrom;
+    _pathToProjectRoot = _findProject(pathToSearchFrom, search: search) ?? pathToSearchFrom;
     verbose(() => 'DartProject.fromPath: $pathToProjectRoot');
   }
 
@@ -73,8 +71,7 @@ class DartProject {
   ///
   /// If [search] is true then it will search from [pathToSearchFrom]
   /// up the tree.
-  static DartProject? findProject(String pathToSearchFrom,
-      {bool search = true}) {
+  static DartProject? findProject(String pathToSearchFrom, {bool search = true}) {
     final path = _findProject(pathToSearchFrom, search: search);
 
     return path == null ? null : DartProject.fromPath(path);
@@ -116,8 +113,7 @@ class DartProject {
       /// The packageConfig is available if passed (which unit tests do)
       /// and when passed is probably the most relable means of
       /// determining the project directory.
-      return _current ??= DartProject.fromPath(
-          dirname(Uri.parse(io.Platform.packageConfig!).path));
+      return _current ??= DartProject.fromPath(dirname(Uri.parse(io.Platform.packageConfig!).path));
     }
     final script = DartScript.self;
     var startFrom = '.';
@@ -139,8 +135,7 @@ class DartProject {
   String get pathToDartToolDir => truepath(_pathToProjectRoot, '.dart_tool');
 
   /// Absolute path to the project's '.dart_tool/package_config.json' directory.
-  String get pathToDartToolPackageConfig =>
-      truepath(pathToDartToolDir, 'package_config.json');
+  String get pathToDartToolPackageConfig => truepath(pathToDartToolDir, 'package_config.json');
 
   /// Absolute path to the project's 'bin' directory.
   String get pathToBinDir => truepath(_pathToProjectRoot, 'bin');
@@ -161,16 +156,13 @@ class DartProject {
   String get pathToToolDir => truepath(_pathToProjectRoot, 'tool');
 
   /// Absolute pathto the project's analysis_options.yaml
-  String get pathToAnalysisOptions =>
-      _pathToPubSpec ??= join(_pathToProjectRoot, 'analysis_options.yaml');
+  String get pathToAnalysisOptions => _pathToPubSpec ??= join(_pathToProjectRoot, 'analysis_options.yaml');
 
   /// Absolute pathto the project's pubspec.yaml
-  String get pathToPubSpec =>
-      _pathToPubSpec ??= join(_pathToProjectRoot, 'pubspec.yaml');
+  String get pathToPubSpec => _pathToPubSpec ??= join(_pathToProjectRoot, 'pubspec.yaml');
 
   /// Absolute pathto the project's pubspec.lock
-  String get pathToPubSpecLock =>
-      _pathToPubSpec ??= join(_pathToProjectRoot, 'pubspec.lock');
+  String get pathToPubSpecLock => _pathToPubSpec ??= join(_pathToProjectRoot, 'pubspec.lock');
 
   /// Used by the dcli doctor command to print
   /// out the DartProjects details.
@@ -195,8 +187,7 @@ class DartProject {
     print('${label.padRight(pad)}: $value');
   }
 
-  String _makeSafe(String line) =>
-      HOME == '.' ? HOME : line.replaceAll(HOME, '<HOME>');
+  String _makeSafe(String line) => HOME == '.' ? HOME : line.replaceAll(HOME, '<HOME>');
 
   /// Searches up the directory tree from [pathToSearchFrom]
   /// for a dart package by looking for a pubspec.yaml.
@@ -220,8 +211,7 @@ class DartProject {
   NamedLock? __lock;
   static const _lockName = 'script.lock';
 
-  NamedLock get _lock =>
-      __lock ??= NamedLock(suffix: _lockName, lockPath: pathToProjectRoot);
+  NamedLock get _lock => __lock ??= NamedLock(suffix: _lockName, lockPath: pathToProjectRoot);
 
   ///
   /// Prepare the project so it can be run.
@@ -240,7 +230,7 @@ class DartProject {
       () async {
         try {
           if (background) {
-            // we run the clean in the background
+            // we run the warmup in the background
             // by running another copy of dcli.
             print('DCli warmup started in the background.');
             '${DCliPaths().dcliName} '
@@ -295,11 +285,9 @@ class DartProject {
 
         _deleteDirs(toBeDeleted);
 
-        find('pubspec.lock', workingDirectory: pathToProjectRoot)
-            .forEach(delete);
+        find('pubspec.lock', workingDirectory: pathToProjectRoot).forEach(delete);
 
-        find('*.dart', workingDirectory: pathToProjectRoot)
-            .forEach((scriptPath) {
+        find('*.dart', workingDirectory: pathToProjectRoot).forEach((scriptPath) {
           final script = DartScript.fromFile(scriptPath);
           if (exists(script.pathToExe)) {
             delete(script.pathToExe);
@@ -321,8 +309,7 @@ class DartProject {
   ///
   void compile({bool install = false, bool overwrite = false}) {
     find('*.dart', workingDirectory: pathToProjectRoot).forEach(
-      (file) => DartScript.fromFile(file)
-          .compile(install: install, overwrite: overwrite),
+      (file) => DartScript.fromFile(file).compile(install: install, overwrite: overwrite),
     );
   }
 
@@ -342,8 +329,7 @@ class DartProject {
       if (Shell.current.isSudo) {
         /// bugger we just screwed the cache permissions so lets fix them.
 //         'chmod -R ${env['USER']}:${env['USER']} ${PubCache().pathTo}'.run;
-        throw DartProjectException(
-            'You must compile your script before running it under sudo');
+        throw DartProjectException('You must compile your script before running it under sudo');
       }
       pubGet.run(compileExecutables: false);
     });
@@ -366,8 +352,7 @@ class DartProject {
         /// bugger we just screwed the cache permissions so lets fix them.
 //         'chmod -R ${env['USER']}:${env['USER']} ${PubCache().pathTo}'.run;
 
-        throw DartProjectException(
-            'You must compile your script before running it under sudo');
+        throw DartProjectException('You must compile your script before running it under sudo');
       }
       pubUpgrade.run(compileExecutables: false);
     });
@@ -387,8 +372,7 @@ class DartProject {
   /// * pubspec.lock
   /// *
   ///
-  bool get isReadyToRun =>
-      hasPubSpec && !DartSdk().isPubGetRequired(pathToProjectRoot);
+  bool get isReadyToRun => hasPubSpec && !DartSdk().isPubGetRequired(pathToProjectRoot);
 
   /// Returns true if this project is a flutter projects.
   ///
@@ -399,8 +383,7 @@ class DartProject {
   bool get hasPubSpec => exists(join(pathToProjectRoot, 'pubspec.yaml'));
 
   /// Returns true if the project has an 'analysis_options.yaml' file.
-  bool get hasAnalysisOptions =>
-      exists(join(pathToProjectRoot, 'analysis_options.yaml'));
+  bool get hasAnalysisOptions => exists(join(pathToProjectRoot, 'analysis_options.yaml'));
 
   void _deleteDirs(List<String> toBeDeleted) {
     for (final dir in toBeDeleted) {
@@ -465,6 +448,5 @@ class DartProjectException extends DCliException {
 /// The requested DCli template does not exists.
 class TemplateNotFoundException extends DCliException {
   /// The requested DCli template does not exists.
-  TemplateNotFoundException(String pathTo)
-      : super('The template $pathTo does not exist.');
+  TemplateNotFoundException(String pathTo) : super('The template $pathTo does not exist.');
 }
