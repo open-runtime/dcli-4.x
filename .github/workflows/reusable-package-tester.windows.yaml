@@ -78,12 +78,9 @@ jobs:
       - name: Echo DCLI Path & Version [Windows]
         if: matrix.config.system_information.operating_system_family == 'windows'
         run: |
-          echo $env:DCLI_BIN_DIR
-          echo $env:PATH
-          Get-Command dcli
-          (Get-Command dcli).Source
-          echo (Join-Path $env:DCLI_BIN_DIR 'dcli')
-          echo dcli
+          $dcli_exe_path = (Get-Command dcli).Source
+          echo "DCLI_EXE_PATH=$dcli_exe_path" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          echo $(dcli)
 
 # Do I need to do somthing like this for Windows?
 # No longer need to move manually as we are using dcli compile -i to automatically install compiled scripts
