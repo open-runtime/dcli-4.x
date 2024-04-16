@@ -69,7 +69,7 @@ jobs:
           cd ../
 
       # Compile internal scripts with pure dart - the only difference here is that these files do not start with a `#! /usr/bin/env dcli` line
-      - name: Compile AOTs for DCLI on Unix
+      - name: Compile AOTs for DCLI on [Unix]
         if: matrix.config.system_information.kernel_family == 'unix'
         run: |
           dart compile exe ./dcli_sdk/bin/dcli.internal.dart -o ./dcli_sdk/bin/dcli_internal
@@ -92,7 +92,7 @@ jobs:
       - name: Compile AOTs with Local Internal DCLI Binary on [Windows]
         if: matrix.config.system_information.operating_system_family == 'windows'
         run: |
-          .\dcli_sdk\bin\dcli_internal -v compile --nowarmup -o .\dcli_sdk\bin\dcli.dart .\dcli_sdk\bin\dcli_complete.dart .\dcli_sdk\bin\dcli_install.dart
+          .\dcli_sdk\bin\dcli_internal.exe -v compile --nowarmup -o .\dcli_sdk\bin\dcli.dart .\dcli_sdk\bin\dcli_complete.dart .\dcli_sdk\bin\dcli_install.dart
 
       - name: Activate DCLI Globally from Local SDK Path on [Unix]
         if: matrix.config.system_information.kernel_family == 'unix'
@@ -113,8 +113,10 @@ jobs:
       - name: Echo DCLI Path & Version [Windows]
         if: matrix.config.system_information.operating_system_family == 'windows'
         run: |
-          echo %PATH%
+          echo $DCLI_BIN_DIR
+          # echo %PATH%
           where dcli.exe
+          $DCLI_BIN_DIR\dcli.exe
           dcli.exe
         shell: cmd
 
@@ -154,7 +156,7 @@ jobs:
       - name: Echo Hello World Script Path & Version [Windows]
         if: matrix.config.system_information.operating_system_family == 'windows'
         run: |
-          echo %PATH%
+          # echo %PATH%
           where hello_world.exe
           hello_world.exe
         shell: cmd
