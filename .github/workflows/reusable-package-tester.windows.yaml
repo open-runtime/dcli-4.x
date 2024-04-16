@@ -80,7 +80,9 @@ jobs:
         run: |
           $dcli_exe_path = (Get-Command dcli).Source
           echo "DCLI_EXE_PATH=$dcli_exe_path" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-          echo $(dcli)
+          $output = & dcli 2>&1
+          if ($LASTEXITCODE -ne 0) { $output += "Exit code: $LASTEXITCODE" }
+          Write-Output $output
 
 # Do I need to do somthing like this for Windows?
 # No longer need to move manually as we are using dcli compile -i to automatically install compiled scripts
