@@ -208,7 +208,7 @@ jobs:
     name: Unit Tests ${{ matrix.config.name }}
     needs:
       - windows-matrix
-    uses: ./.github/workflows/reusable-package-tester.yaml
+    uses: ./.github/workflows/reusable-package-tester.windows.yaml
     with:
       matrix-config: ${{ needs.windows-matrix.outputs.MATRIX_CONFIG }}
     secrets: inherit

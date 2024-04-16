@@ -1,0 +1,112 @@
+name: (Shared) DCLI Unit Tests
+
+on:
+  workflow_call:
+    inputs:
+      matrix-config:
+        description: 'The Matrix as a JSON String to be used for the Matrix Strategy'
+        required: true
+        type: string
+
+jobs:
+  compose:
+    name: ${{ matrix.config.name }} Composition
+    runs-on: ${{ matrix.config.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - ${{ fromJSON(inputs.matrix-config) }}
+
+    env:
+      GH_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: dart-lang/setup-dart@v1.3
+
+      - name: Echo Default Cache Paths [Windows]
+        if: matrix.config.system_information.operating_system_family == 'windows'
+        env:
+          DART_SDK_DIR_DEFAULT: C:\tools\dart-sdk\bin
+        run: |
+          echo "DART_SDK_DIR=$($env:DART_SDK_DIR_DEFAULT)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          # echo "DCLI_BIN_DIR=$(echo $env:LOCALAPPDATA)\\Pub\\Cache\\bin" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append          
+          $program_files = $env:ProgramFiles
+          $dcli_bin_dir = Join-Path -Path $program_files -ChildPath "\.dcli\bin"
+          echo "DCLI_BIN_DIR=$dcli_bin_dir" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          echo "PUB_CACHE_DIR=$env:USERPROFILE\.pub-cache\" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+      - name: Echo Initial Cache Locations
+        run: |
+          echo 'DART_SDK_DIR: ${{ env.DART_SDK_DIR }}'
+          echo 'DCLI_BIN_DIR: ${{ env.DCLI_BIN_DIR }}'
+          echo 'PUB_CACHE_DIR: ${{ env.PUB_CACHE_DIR }}'
+
+      - name: Run Pub Get [Windows]
+        if: matrix.config.system_information.operating_system_family == 'windows'
+        run: |
+          cd .\dcli && dart pub get
+          cd ..\dcli_common && dart pub get
+          cd ..\dcli_core && dart pub get
+          cd ..\dcli_sdk && dart pub get
+          cd ..\dcli_input && dart pub get
+          cd ..\dcli_terminal && dart pub get
+          cd ..\dcli_test && dart pub get
+          cd ..\dcli_unit_tester && dart pub get
+          cd ..\
+
+      # Compile internal scripts with pure dart - the only difference here is that these files do not start with a `#! /usr/bin/env dcli` line
+      - name: Compile AOTs for DCLI on [Windows]
+        if: matrix.config.system_information.operating_system_family == 'windows'
+        run: |
+          dart compile exe .\dcli_sdk\bin\dcli.internal.dart -o .\dcli_sdk\bin\dcli_internal.exe
+          dart compile exe .\dcli_sdk\bin\dcli_complete.internal.dart -o .\dcli_sdk\bin\dcli_internal_complete.exe
+          dart compile exe .\dcli_sdk\bin\dcli_install.internal.dart -o .\dcli_sdk\bin\dcli_internal_install.exe
+
+      # Use the internal dcli executable to compile the dcli scripts that start with `#! /usr/bin/env dcli` line
+      - name: Compile AOTs with Local Internal DCLI Binary on [Windows]
+        if: matrix.config.system_information.operating_system_family == 'windows'
+        run: |
+          .\dcli_sdk\bin\dcli_internal.exe -v compile --nowarmup -o .\dcli_sdk\bin\dcli.dart .\dcli_sdk\bin\dcli_complete.dart .\dcli_sdk\bin\dcli_install.dart
+
+      - name: Activate DCLI Globally from Local SDK Path on [Windows]
+        if: matrix.config.system_information.operating_system_family == 'windows'
+        run: |
+          dart pub global activate -spath .\dcli_sdk --overwrite
+
+      - name: Echo DCLI Path & Version [Windows]
+        if: matrix.config.system_information.operating_system_family == 'windows'
+        run: |
+          echo $env:DCLI_BIN_DIR
+          echo $env:PATH
+          Get-Command dcli
+          Get-Command dcli_sdk
+          echo (Join-Path $env:DCLI_BIN_DIR 'dcli')
+          echo dcli
+
+# Do I need to do somthing like this for Windows?
+# No longer need to move manually as we are using dcli compile -i to automatically install compiled scripts
+#      - name: Move AOTs to Dart Pub Cache
+#        run: |
+#          mv ./dcli_sdk/bin/dcli $PUB_CACHE_DIR/bin
+#          mv ./dcli_sdk/bin/dcli_complete $PUB_CACHE_DIR/bin
+#          mv ./dcli_sdk/bin/dcli_install $PUB_CACHE_DIR/bin
+
+      - name: Run DCLI Install on [Windows]
+        if: matrix.config.system_information.operating_system_family == 'windows'
+        run: |
+          dcli -v install
+
+      - name: Compile and install hello_world.dart with DCLI on [Windows]
+        if: matrix.config.system_information.operating_system_family == 'windows'
+        run: |
+          dcli -v compile -i --nowarmup .\dcli_sdk\bin\hello_world.dart
+
+      - name: Echo Hello World Script Path & Version [Windows]
+        if: matrix.config.system_information.operating_system_family == 'windows'
+        run: |
+          # echo %PATH%
+          where hello_world.exe
+          hello_world.exe
+        shell: cmd
