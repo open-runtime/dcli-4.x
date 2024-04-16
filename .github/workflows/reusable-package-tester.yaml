@@ -77,7 +77,7 @@ jobs:
           dart compile exe ./dcli_sdk/bin/dcli_install.internal.dart -o ./dcli_sdk/bin/dcli_internal_install 
 
       - name: Compile AOTs for DCLI on [Windows]
-        if: matrix.config.system_information.kernel_family == 'windows'
+        if: matrix.config.system_information.operating_system_family == 'windows'
         run: |
           dart compile exe .\dcli_sdk\bin\dcli.internal.dart -o .\dcli_sdk\bin\dcli_internal.exe
           dart compile exe .\dcli_sdk\bin\dcli_complete.internal.dart -o .\dcli_sdk\bin\dcli_internal_complete.exe
@@ -90,7 +90,7 @@ jobs:
           ./dcli_sdk/bin/dcli_internal -v compile --nowarmup -o ./dcli_sdk/bin/dcli.dart ./dcli_sdk/bin/dcli_complete.dart ./dcli_sdk/bin/dcli_install.dart
 
       - name: Compile AOTs with Local Internal DCLI Binary on [Windows]
-        if: matrix.config.system_information.kernel_family == 'windows'
+        if: matrix.config.system_information.operating_system_family == 'windows'
         run: |
           .\dcli_sdk\bin\dcli_internal -v compile --nowarmup -o .\dcli_sdk\bin\dcli.dart .\dcli_sdk\bin\dcli_complete.dart .\dcli_sdk\bin\dcli_install.dart
 
@@ -100,14 +100,23 @@ jobs:
           dart pub global activate -spath ./dcli_sdk --overwrite
 
       - name: Activate DCLI Globally from Local SDK Path on [Windows]
-        if: matrix.config.system_information.kernel_family == 'windows'
+        if: matrix.config.system_information.operating_system_family == 'windows'
         run: |
           dart pub global activate -spath .\dcli_sdk --overwrite
 
-      - name: Echo DCLI Path & Version
+      - name: Echo DCLI Path & Version [Unix]
+        if: matrix.config.system_information.kernel_family == 'unix'
         run: |
           echo $(which dcli)
           echo $(dcli)
+
+      - name: Echo DCLI Path & Version [Windows]
+        if: matrix.config.system_information.operating_system_family == 'windows'
+        run: |
+          echo %PATH%
+          where dcli.exe
+          dcli.exe
+        shell: cmd
 
 # No longer need to move manually as we are using dcli compile -i to automatically install compiled scripts
 #      - name: Move AOTs to Dart Pub Cache
@@ -122,7 +131,7 @@ jobs:
           sudo env "PATH=$PATH" dcli -v install
 
       - name: Run DCLI Install on [Windows]
-        if: matrix.config.system_information.kernel_family == 'windows'
+        if: matrix.config.system_information.operating_system_family == 'windows'
         run: |
           dcli -v install
 
@@ -132,14 +141,23 @@ jobs:
           dcli -v compile -i --nowarmup ./dcli_sdk/bin/hello_world.dart
 
       - name: Compile and install hello_world.dart with DCLI on [Windows]
-        if: matrix.config.system_information.kernel_family == 'windows'
+        if: matrix.config.system_information.operating_system_family == 'windows'
         run: |
           dcli -v compile -i --nowarmup .\dcli_sdk\bin\hello_world.dart
 
-      - name: Echo Hello World Script Path & Version
+      - name: Echo Hello World Script Path & Version [Unix]
+        if: matrix.config.system_information.kernel_family == 'unix'
         run: |
           echo $(which hello_world)
           echo $(hello_world)
+
+      - name: Echo Hello World Script Path & Version [Windows]
+        if: matrix.config.system_information.operating_system_family == 'windows'
+        run: |
+          echo %PATH%
+          where hello_world.exe
+          hello_world.exe
+        shell: cmd
 
 #      - name: Run Unit Tests for synchronous_test.dart
 #        run: cd ./dcli && dart test ./test/src/process/process/synchronous_test.dart && cd ../
