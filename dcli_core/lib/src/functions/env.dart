@@ -96,8 +96,7 @@ class Env extends DCliFunction {
   Env._internal() : _caseSensitive = !Settings().isWindows {
     final platformVars = Platform.environment;
 
-    _envVars =
-        CanonicalizedMap((key) => _caseSensitive ? key : key.toUpperCase());
+    _envVars = CanonicalizedMap((key) => _caseSensitive ? key : key.toUpperCase());
 
     // build a local map with all of the OS environment vars.
     for (final entry in platformVars.entries) {
@@ -396,12 +395,9 @@ class Env extends DCliFunction {
 /// returns.
 /// This is particularly useful for unit tests and running
 /// a process that requires specific environment variables.
-Future<R> withEnvironmentAsync<R>(Future<R> Function() callback,
-    {required Map<String, String> environment}) async {
+Future<R> withEnvironmentAsync<R>(Future<R> Function() callback, {required Map<String, String> environment}) async {
   final existing = Env()._envVars;
-  return (Scope()
-        ..value(Env.scopeKey, Env.forScope(existing)..addAll(environment)))
-      .run(() async => callback());
+  return (Scope()..returned(Env.scopeKey, Env.forScope(existing)..addAll(environment))).run(() async => callback());
 }
 
 /// Injects environment variables into the scope
@@ -409,12 +405,9 @@ Future<R> withEnvironmentAsync<R>(Future<R> Function() callback,
 /// You must [withEnvironmentAsync] if the callback is async.
 ///
 /// See [withEnvironmentAsync] for general details
-R withEnvironment<R>(R Function() callback,
-    {required Map<String, String> environment}) {
+R withEnvironment<R>(R Function() callback, {required Map<String, String> environment}) {
   final existing = Env()._envVars;
-  return (Scope()
-        ..value(Env.scopeKey, Env.forScope(existing)..addAll(environment)))
-      .runSync(() => callback());
+  return (Scope()..returned(Env.scopeKey, Env.forScope(existing)..addAll(environment))).runSync(() => callback());
 }
 
 /// Base class for all Environment variable related exceptions.
