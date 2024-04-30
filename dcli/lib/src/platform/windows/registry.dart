@@ -289,11 +289,10 @@ String regGetExpandString(
 }) {
   late final String value;
 
-  var flags = REG_SZ;
+  var flags = RRF_RT_REG_EXPAND_SZ | RRF_RT_REG_SZ;
 
   if (expand == false) {
-    // flags = RRF_NOEXPAND;
-    flags = RRF_RT_REG_EXPAND_SZ | RRF_NOEXPAND;
+    flags |= RRF_NOEXPAND;
   }
 
   final pResult = _regGetValue(

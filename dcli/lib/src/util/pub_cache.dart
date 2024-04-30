@@ -291,7 +291,7 @@ class PubCache {
 
     /// run pub global list to see if dcli is run from a local path.
     final line = DartSdk()
-        .runPub(args: ['global', 'list'], progress: Progress.capture())
+        . runPub(args: ['global', 'list'], progress: Progress.capture())
         .lines
         .firstWhere((line) => line.startsWith(packageName),
             orElse: () => notFound);

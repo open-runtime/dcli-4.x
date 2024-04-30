@@ -115,7 +115,8 @@ void main() {
 }
 
 Future<ReceivePort> spawn(String message, String logFile) async {
-  final back = await Isolate.spawn(writeToLog, '$message;$logFile', paused: true);
+  final back =
+      await Isolate.spawn(writeToLog, '$message;$logFile', paused: true);
   final port = ReceivePort();
   back
     ..addOnExitListener(port.sendPort)
