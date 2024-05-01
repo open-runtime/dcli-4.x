@@ -41,14 +41,12 @@ class CleanCommand extends Command {
     return 0;
   }
 
-  Future<void> _cleanProject(String targetPath) async {
+  _cleanProject(String targetPath) {
     if (!exists(targetPath)) {
-      throw InvalidCommandArgumentException(
-          'The project path $targetPath does not exists.');
+      throw InvalidCommandArgumentException('The project path $targetPath does not exists.');
     }
     if (!isDirectory(targetPath)) {
-      throw InvalidCommandArgumentException(
-          'The project path must be a directory.');
+      throw InvalidCommandArgumentException('The project path must be a directory.');
     }
 
     final project = DartProject.fromPath(targetPath);
@@ -57,7 +55,7 @@ class CleanCommand extends Command {
     print(orange('Cleaning ${project.pathToProjectRoot} ...'));
     print('');
 
-    await project.clean();
+    project.clean();
   }
 
   @override

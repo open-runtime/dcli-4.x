@@ -1,4 +1,4 @@
-# melos_managed_dependency_overrides: dart_console,settings_yaml,system_info
+# melos_managed_dependency_overrides: dart_console,settings_yaml,system_info,runtime_native_semaphores
 dependency_overrides: 
   dcli_core: 
     path: ../dcli_core
@@ -17,18 +17,16 @@ dependency_overrides:
 # pubspec_manager:
 #   path: ../../pubspec_manager
   dart_console:
-    git:
-      url: https://github.com/open-runtime/dart_console.git
-      ref: aot_monorepo_compat
+    path: ../../dart_console
   settings_yaml:
-    git:
-      url: https://github.com/open-runtime/settings_yaml-4.x.git
-      ref: aot_monorepo_compat
+    path: ../../settings_yaml
   system_info:
-    git:
-      url: https://github.com/open-runtime/system_info.git
-      ref: aot_monorepo_compat
+    path: ../../system_info
   pubspec_manager:
     git:
       url: https://github.com/open-runtime/pubspec_manager.git
       ref: aot_monorepo_compat
+  runtime_named_locks:
+    path: ../../../libraries/dart/named_locks
+  runtime_native_semaphores:
+    path: ../../../libraries/dart/native_semaphores

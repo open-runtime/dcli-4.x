@@ -15,6 +15,7 @@ import 'dart:isolate';
 
 import 'package:async/async.dart';
 import 'package:dcli/dcli.dart';
+import 'package:dcli/src/util/named_lock.dart';
 import 'package:dcli_core/dcli_core.dart' as core;
 import 'package:path/path.dart' hide equals;
 import 'package:test/test.dart';
@@ -115,8 +116,7 @@ void main() {
 }
 
 Future<ReceivePort> spawn(String message, String logFile) async {
-  final back =
-      await Isolate.spawn(writeToLog, '$message;$logFile', paused: true);
+  final back = await Isolate.spawn(writeToLog, '$message;$logFile', paused: true);
   final port = ReceivePort();
   back
     ..addOnExitListener(port.sendPort)

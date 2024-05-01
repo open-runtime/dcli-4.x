@@ -17,5 +17,5 @@ import 'package:dcli/dcli.dart';
 ///
 
 void main(List<String> args) async {
-  await DartProject.fromPath('.').clean();
+  DartProject.fromPath('.').clean();
 }

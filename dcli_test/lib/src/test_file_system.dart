@@ -13,6 +13,7 @@ import 'dart:isolate';
 
 import 'package:dcli/dcli.dart';
 import 'package:path/path.dart';
+import 'package:runtime_named_locks/runtime_named_locks.dart';
 import 'package:stack_trace/stack_trace.dart';
 import 'package:test/test.dart';
 import 'package:uuid/uuid.dart';
@@ -146,8 +147,7 @@ class TestFileSystem {
       if (!dcliActivated) {
         print(blue('Globally activating DCli into test file system'));
         await capture(() async {
-          PubCache().globalActivateFromSource(
-              join(DartProject.self.pathToProjectRoot, '..', 'dcli_sdk'));
+          PubCache().globalActivateFromSource(join(DartProject.self.pathToProjectRoot, '..', 'dcli_sdk'));
         }, progress: Progress.printStdErr());
         dcliActivated = true;
       }
@@ -317,10 +317,8 @@ class TestFileSystem {
 
   /// we need to update any pubspec.yaml files that have a relative
   /// dependency to dcli after we move them to the test file system.
-  Future<void> _patchRelativeDependenciesAndWarmup(
-      String testScriptPath) async {
-    find('pubspec.yaml', workingDirectory: testScriptPath)
-        .forEach((pathToPubspec) async {
+  Future<void> _patchRelativeDependenciesAndWarmup(String testScriptPath) async {
+    find('pubspec.yaml', workingDirectory: testScriptPath).forEach((pathToPubspec) async {
       final dcliProject = DartProject.fromPath('.');
 
       final pathToDCliRoot = dirname(dcliProject.pathToProjectRoot);
@@ -341,8 +339,7 @@ dependency_overrides:
 
       // ignore: discarded_futures
       await capture(() async {
-        await DartProject.fromPath(dirname(pathToPubspec))
-            .warmup(upgrade: true);
+        DartProject.fromPath(dirname(pathToPubspec)).warmup(upgrade: true);
       }, progress: Progress.printStdErr());
     });
   }
@@ -363,10 +360,7 @@ dependency_overrides:
       createDir(pathToTools, recursive: true);
     }
 
-    if (!exists(join(pathToTools, 'head')) ||
-        !exists(join(pathToTools, 'tail')) ||
-        !exists(join(pathToTools, 'ls')) ||
-        !exists(join(pathToTools, 'touch'))) {
+    if (!exists(join(pathToTools, 'head')) || !exists(join(pathToTools, 'tail')) || !exists(join(pathToTools, 'ls')) || !exists(join(pathToTools, 'touch'))) {
       final required = ['head', 'tail', 'ls', 'touch'];
 
       // may not exists on the first pass through.
@@ -375,25 +369,28 @@ dependency_overrides:
       }
 
       await capture(() async {
-        await DartProject.fromPath(pathToTools).warmup();
+        DartProject.fromPath(pathToTools).warmup();
       }, progress: Progress.printStdErr());
 
-      await NamedLock(suffix: 'compile').withLock(() async {
-        for (final command in required) {
-          final script = DartScript.fromFile(join(pathToPackageUnitTester,
-              'test', 'test_script', 'general', 'bin', '$command.dart'));
-          if (!exists(join(pathToTools, script.pathToExe))) {
-            /// compile and install the command into the tool path
-            script.compile();
-            copy(script.pathToExe, pathToTools);
-          }
-        }
-      });
+      NamedLock.guard(
+        name: 'dcli.compile',
+        execution: ExecutionCall<void>(
+          callable: () {
+            for (final command in required) {
+              final script = DartScript.fromFile(join(pathToPackageUnitTester, 'test', 'test_script', 'general', 'bin', '$command.dart'));
+              if (!exists(join(pathToTools, script.pathToExe))) {
+                /// compile and install the command into the tool path
+                script.compile();
+                copy(script.pathToExe, pathToTools);
+              }
+            }
+          },
+        ),
+      );
     }
   }
 
-  bool isDCliRunningFromSource() =>
-      PubCache().isGloballyActivatedFromSource('dcli_sdk');
+  bool isDCliRunningFromSource() => PubCache().isGloballyActivatedFromSource('dcli_sdk');
 }
 
 class TestFileSystemException extends DCliException {

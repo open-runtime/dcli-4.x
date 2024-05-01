@@ -41,12 +41,10 @@ class WarmupCommand extends Command {
 
   Future<void> _prepareProject(String targetPath) async {
     if (!exists(targetPath)) {
-      throw InvalidCommandArgumentException(
-          'The project path $targetPath does not exists.');
+      throw InvalidCommandArgumentException('The project path $targetPath does not exists.');
     }
     if (!isDirectory(targetPath)) {
-      throw InvalidCommandArgumentException(
-          'The project path must be a directory.');
+      throw InvalidCommandArgumentException('The project path must be a directory.');
     }
 
     final project = DartProject.fromPath(targetPath);
@@ -55,7 +53,7 @@ class WarmupCommand extends Command {
     print(orange('Preparing ${project.pathToProjectRoot} ...'));
     print('');
 
-    await project.warmup();
+    project.warmup();
   }
 
   @override

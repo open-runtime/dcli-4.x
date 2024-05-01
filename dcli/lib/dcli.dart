@@ -43,22 +43,11 @@ export 'src/functions/cat.dart' show CatException, cat;
 export 'src/functions/confirm.dart';
 export 'src/functions/copy.dart' show CopyException, copy;
 export 'src/functions/copy_tree.dart' show copyTree;
-export 'src/functions/create_dir.dart'
-    show CreateDirException, createDir, createTempDir, withTempDir;
+export 'src/functions/create_dir.dart' show CreateDirException, createDir, createTempDir, withTempDir;
 export 'src/functions/delete.dart' show DeleteException, delete;
 export 'src/functions/delete_dir.dart' show DeleteDirException, deleteDir;
 export 'src/functions/echo.dart' show echo;
-export 'src/functions/fetch.dart'
-    show
-        FetchData,
-        FetchException,
-        FetchMethod,
-        FetchProgress,
-        FetchStatus,
-        FetchUrl,
-        OnFetchProgress,
-        fetch,
-        fetchMultiple;
+export 'src/functions/fetch.dart' show FetchData, FetchException, FetchMethod, FetchProgress, FetchStatus, FetchUrl, OnFetchProgress, fetch, fetchMultiple;
 export 'src/functions/file_list.dart' show fileList;
 export 'src/functions/find.dart' show Find, find;
 export 'src/functions/head.dart' show head;
@@ -93,7 +82,7 @@ export 'src/util/exceptions.dart';
 export 'src/util/file_sort.dart' show Column, FileSort, SortDirection;
 export 'src/util/file_sync.dart';
 export 'src/util/file_util.dart';
-export 'src/util/named_lock.dart' show LockException, NamedLock;
+// export 'src/util/named_lock.dart' show LockException, NamedLock;
 export 'src/util/process_helper.dart' show ProcessDetails, ProcessHelper;
 export 'src/util/pub_cache.dart';
 export 'src/util/remote.dart' show Remote;
