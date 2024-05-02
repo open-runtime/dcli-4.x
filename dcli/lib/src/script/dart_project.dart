@@ -228,9 +228,9 @@ class DartProject {
   /// pub get.
   ///
   void warmup({bool background = false, bool upgrade = false}) {
-    NamedLock.guard(
+    NamedLock.guard<void, PubGetException>(
       name: _lockName,
-      execution: ExecutionCall<void>(
+      execution: ExecutionCall(
         callable: () {
           try {
             if (background) {
@@ -278,7 +278,7 @@ class DartProject {
   void clean() {
     NamedLock.guard(
       name: _lockName,
-      execution: ExecutionCall<void>(
+      execution: ExecutionCall<void, PubGetException>(
         callable: () {
           try {
             find(
@@ -368,7 +368,7 @@ class DartProject {
   void _pubget() {
     NamedLock.guard(
       name: _lockName,
-      execution: ExecutionCall<void>(callable: () {
+      execution: ExecutionCall<void, DartProjectException>(callable: () {
         final pubGet = PubGet(this);
         if (Shell.current.isSudo) {
           /// bugger we just screwed the cache permissions so lets fix them.
@@ -391,7 +391,7 @@ class DartProject {
     // Refactor with named lock guard
     NamedLock.guard(
         name: _lockName,
-        execution: ExecutionCall<void>(callable: () {
+        execution: ExecutionCall<void, DartProjectException>(callable: () {
           final pubUpgrade = PubUpgrade(this);
           if (Shell.current.isSudo) {
             /// bugger we just screwed the cache permissions so lets fix them.

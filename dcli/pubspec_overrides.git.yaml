@@ -33,7 +33,7 @@ dependency_overrides:
       url: https://github.com/open-runtime/pubspec_manager.git
       ref: aot_monorepo_compat
 
-  runtime_named_locks:
-    git:
-      url: https://github.com/open-runtime/named_locks.git
-      ref: aot_monorepo_compat
+#  runtime_named_locks:
+#    git:
+#      url: https://github.com/open-runtime/named_locks.git
+#      ref: aot_monorepo_compat

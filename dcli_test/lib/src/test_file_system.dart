@@ -374,7 +374,7 @@ dependency_overrides:
 
       NamedLock.guard(
         name: 'dcli.compile',
-        execution: ExecutionCall<void>(
+        execution: ExecutionCall<void, Exception>(
           callable: () {
             for (final command in required) {
               final script = DartScript.fromFile(join(pathToPackageUnitTester, 'test', 'test_script', 'general', 'bin', '$command.dart'));
