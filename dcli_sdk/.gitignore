@@ -1,1 +1,4 @@
 .failed_tracker
+bin/dcli
+bin/dcli_install
+bin/dcli_complete
