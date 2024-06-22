@@ -8,21 +8,10 @@ dependency_overrides:
     path: ../dcli_core
   dcli_terminal: 
     path: ../dcli_terminal
-
-#  dart_console:
-#    path: ../../dart_console
-#  settings_yaml:
-#    path: ../../settings_yaml
-#  system_info:
-#    path: ../../system_info
-
+  settings_yaml:
+    path: ../../settings_yaml
   dart_console:
     path: ../../dart_console
-  settings_yaml:
-    git:
-      url: https://github.com/open-runtime/settings_yaml-4.x.git
-      ref: aot_monorepo_compat
-  
   system_info:
     path: ../../system_info
   runtime_named_locks:

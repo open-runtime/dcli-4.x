@@ -26,8 +26,12 @@ void main() {
           final pathToTemplate = join(fs, 'test');
 
           await core.withEnvironmentAsync(() async {
-            DartProject.create(pathTo: pathToTemplate, templateName: 'simple').warmup();
-          }, environment: {'DCLI_OVERRIDE_PATH': DartProject.self.pathToProjectRoot});
+             DartProject.create(
+                    pathTo: pathToTemplate, templateName: 'simple')
+                .warmup();
+          }, environment: {
+            'DCLI_OVERRIDE_PATH': DartProject.self.pathToProjectRoot
+          });
 
           checkProjectStructure(pathToTemplate, scriptName);
         });
@@ -43,8 +47,12 @@ void main() {
             final pathToTemplate = join(fs, 'test');
 
             await core.withEnvironmentAsync(() async {
-              DartProject.create(pathTo: pathToTemplate, templateName: 'simple').warmup();
-            }, environment: {'DCLI_OVERRIDE_PATH': DartProject.self.pathToProjectRoot});
+               DartProject.create(
+                      pathTo: pathToTemplate, templateName: 'simple')
+                  .warmup();
+            }, environment: {
+              'DCLI_OVERRIDE_PATH': DartProject.self.pathToProjectRoot
+            });
 
             final progress = DartScript.fromFile(pathToScript).start();
             expect(progress.exitCode == 0, isTrue);

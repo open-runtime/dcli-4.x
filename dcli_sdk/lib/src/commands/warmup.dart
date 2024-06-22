@@ -53,7 +53,7 @@ class WarmupCommand extends Command {
     print(orange('Preparing ${project.pathToProjectRoot} ...'));
     print('');
 
-    project.warmup();
+    await project.warmup();
   }
 
   @override
