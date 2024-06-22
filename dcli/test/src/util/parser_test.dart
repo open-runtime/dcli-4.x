@@ -41,7 +41,7 @@ void main() {
 name: pubspec_local
 version: 1.0.0
 environment: 
-  sdk: '>=2.6.0 <3.0.0'
+  sdk: '>=3.3.0 <4.5.0'
 dependencies: 
   dcli: ^0.20.0''',
           );

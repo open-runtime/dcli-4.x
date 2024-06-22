@@ -2,7 +2,7 @@ name: since
 version: 0.0.1
 description: A since command-line application created by dcli
 environment: 
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '>=3.3.0 <4.5.0'
 dependencies: 
   dcli: ^2.2.0
   stack_trace: ^1.10.0

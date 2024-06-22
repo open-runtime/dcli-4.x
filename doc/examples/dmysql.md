@@ -161,7 +161,7 @@ name: dmysql
 version: 1.0.0
 description: Saves db connection settings and connects to a db cli
 environment: 
-  sdk: '>=2.6.0 <3.0.0'
+  sdk: '>=3.3.0 <4.5.0'
 dependencies: 
   args: ^1.0.0
   dcli: ^0.24.1
