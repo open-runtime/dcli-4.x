@@ -15,12 +15,10 @@ import 'dart:isolate';
 
 import 'package:async/async.dart';
 import 'package:dcli/dcli.dart';
-import 'package:dcli/src/util/named_lock.dart';
 import 'package:dcli_core/dcli_core.dart' as core;
 import 'package:path/path.dart' hide equals;
+import 'package:runtime_named_locks/runtime_named_locks.dart';
 import 'package:test/test.dart';
-
-// const port = 9003;
 
 void main() {
   test('lock path', () {
@@ -28,18 +26,41 @@ void main() {
     print(lockPath);
   });
 
-  test('exception catch', () async {
-
-    Future<void> throwsWithLock() async => NamedLock(suffix: 'exception')
-        .withLock(() => throw DCliException('fake exception'));
-    var future = throwsWithLock().catchError((e) => print('caught $e'));
-    await expectLater(future, throwsA(isA<DCliException>()),
+  test('unsafe exception catch', () async {
+    final execution = ExecutionCall<void, DCliException>(
+      callable: () => throw DCliException('fake exception'),
     );
 
+    expect(
+          () => NamedLock.guard<void, DCliException>(
+        name: 'unsafe.exception.lock',
+        execution: execution,
+      ),
+      throwsA(isA<DCliException>()),
+    );
+  });
+
+  test('safe exception catch', () async {
+    final execution = ExecutionCall<void, DCliException>(
+      callable: () => throw DCliException('fake exception'),
+      safe: true,
+    );
+
+    final guarded = NamedLock.guard<void, DCliException>(
+      name: 'safe.exception.lock',
+      execution: execution,
+    );
+
+    expect(guarded.successful.get, false);
+    expect(guarded.error.get?.anticipated.get, isA<DCliException>());
+    expect(
+          () => guarded.error.get?.rethrow_(),
+      throwsA(isA<DCliException>()),
+    );
   });
 
   test(
-    'withLock',
+    'File Operations with NamedLock.guard',
         () async {
       await core.withTempDirAsync(
             (fs) async {
@@ -81,11 +102,10 @@ void main() {
         keep: true,
       );
     },
-    skip: false,
   );
 
   test(
-    'Thrash test',
+    'Thrash Test',
         () async {
       Settings().setVerbose(enabled: false);
       if (exists(_lockCheckPath)) {
@@ -111,12 +131,12 @@ void main() {
       expect(exists(_lockFailedPath), equals(false));
     },
     timeout: const Timeout(Duration(minutes: 30)),
+    skip: false,
   );
 }
 
 Future<ReceivePort> spawn(String message, String logFile) async {
-  final back =
-  await Isolate.spawn(writeToLog, '$message;$logFile', paused: true);
+  final back = await Isolate.spawn(writeToLog, '$message;$logFile', paused: true);
   final port = ReceivePort();
   back
     ..addOnExitListener(port.sendPort)
@@ -124,19 +144,23 @@ Future<ReceivePort> spawn(String message, String logFile) async {
   return port;
 }
 
-Future<void> writeToLog(String data) async {
+void writeToLog(String data) {
   final parts = data.split(';');
   final message = parts[0];
   final log = parts[1];
-  await NamedLock(suffix: 'test.lock').withLock(() async {
-    var count = 0;
-    for (var i = 0; i < 4; i++) {
-      final l = '$message + ${count++}';
-      print(l);
-      log.append(l);
-      sleep(1);
-    }
-  });
+
+  NamedLock.guard(
+    name: 'test.log.lock',
+    execution: ExecutionCall(callable: () {
+      var count = 0;
+      for (var i = 0; i < 4; i++) {
+        final l = '$message + ${count++}';
+        print(l);
+        log.append(l);
+        sleep(1);
+      }
+    }),
+  );
 
   print('Finished Write to Log for $message');
 }
@@ -148,25 +172,30 @@ final _lockFailedPath = join(_lockCheckPath, 'lock_failed');
 Future<void> worker(int instance) async {
   Settings().setVerbose(enabled: false);
   print('starting worker instance $instance ${DateTime.now()}');
-  await NamedLock(suffix: 'gshared-compile').withLock(() async {
-    print('acquired lock worker $instance  ${DateTime.now()}');
-    final inLockPath = join(_lockCheckPath, 'inlock');
 
-    /// If the [inLockPath] file exists
-    /// then the lock has been breached.
-    if (exists(inLockPath)) {
-      touch(_lockFailedPath, create: true);
-      throw DCliException(
-        'NamedLock for $instance failed as another lock is active',
-      );
-    }
+  NamedLock.guard(
+    name: 'gshared-compile.lock',
+    execution: ExecutionCall(callable: () {
+      print('acquired lock worker $instance  ${DateTime.now()}');
+      final inLockPath = join(_lockCheckPath, 'inlock');
 
-    touch(inLockPath, create: true);
+      /// If the [inLockPath] file exists
+      /// then the lock has been breached.
+      if (exists(inLockPath)) {
+        touch(_lockFailedPath, create: true);
+        throw DCliException(
+          'NamedLock for $instance failed as another lock is active',
+        );
+      }
 
-    sleep(2);
-    print('finished work $instance  ${DateTime.now()}');
-    delete(inLockPath);
-  });
+      touch(inLockPath, create: true);
+
+      sleep(2);
+      print('finished work $instance  ${DateTime.now()}');
+      delete(inLockPath);
+    }),
+  );
+
   print('released lock $instance  ${DateTime.now()}');
 }
 
