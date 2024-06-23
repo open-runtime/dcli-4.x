@@ -369,7 +369,7 @@ dependency_overrides:
       }
 
       await capture(() async {
-        await DartProject.fromPath(pathToTools).warmup();
+        DartProject.fromPath(pathToTools).warmup();
       }, progress: Progress.printStdErr());
 
       NamedLock.guard(

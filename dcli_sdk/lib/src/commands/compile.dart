@@ -99,14 +99,13 @@ class CompileCommand extends Command {
       // by default we warmup the project unless the -np flag is passed.
       // however if the project isn't i a runnable state then we
       // force a build.
-      final buildRequired =
-          !flagSet.isSet(NoWarmupFlag()) || !script.isReadyToRun;
+      final buildRequired = !flagSet.isSet(NoWarmupFlag()) || !script.isReadyToRun;
 
       print('path: ${script.pathToScript}');
       final project = DartProject.fromPath(script.pathToScriptDirectory);
 
       if (buildRequired) {
-        await project.warmup();
+        project.warmup();
       }
 
       var install = flagSet.isSet(InstallFlag());
@@ -153,8 +152,7 @@ compile [--nowarmup] [--install] [--overwrite] [<script path.dart>, <script path
   }
 
   @override
-  List<String> completion(String word) =>
-      completionExpandScripts(word, extension: '.dart');
+  List<String> completion(String word) => completionExpandScripts(word, extension: '.dart');
 
   @override
   List<Flag> flags() => _compileFlags;
@@ -190,8 +188,7 @@ compile [--nowarmup] [--install] [--overwrite] [<script path.dart>, <script path
     // we are compiling a globally activated package
     // we must be passed the package name and optionally a version
     if (scriptList.length != 1 && scriptList.length != 2) {
-      throw InvalidCommandArgumentException(
-          'The "--package" flag must be followed by '
+      throw InvalidCommandArgumentException('The "--package" flag must be followed by '
           'the name of the package and optionally a version');
     }
 
@@ -207,11 +204,9 @@ compile [--nowarmup] [--install] [--overwrite] [<script path.dart>, <script path
   /// Compiles a globally activted
   Future<void> compilePackage(String packageName, {String? version}) async {
     if (packageName.contains(separator)) {
-      throw InvalidCommandArgumentException(
-          'The package must not include a path.');
+      throw InvalidCommandArgumentException('The package must not include a path.');
     }
-    if (!PubCache().isInstalled(packageName) &&
-        !PubCache().isGloballyActivated(packageName)) {
+    if (!PubCache().isInstalled(packageName) && !PubCache().isGloballyActivated(packageName)) {
       throw InvalidCommandArgumentException('''
 To compile the package $packageName it must first be installed.
 Run:
@@ -220,8 +215,7 @@ Run:
     }
 
     if (!exists(Settings().pathToDCli)) {
-      throw DCliNotInstalledException(
-          "You must first install DCli by running 'dcli install'");
+      throw DCliNotInstalledException("You must first install DCli by running 'dcli install'");
     }
 
     late final String pathToPackage;
@@ -229,13 +223,11 @@ Run:
     /// Find all the the exectuables the package exposes
     if (version == null) {
       late final version = PubCache().findPrimaryVersion(packageName);
-      pathToPackage =
-          PubCache().pathToPackage(packageName, version?.toString() ?? '');
+      pathToPackage = PubCache().pathToPackage(packageName, version?.toString() ?? '');
     } else {
       final pathTo = PubCache().findVersion(packageName, version);
       if (pathTo == null) {
-        throw InvalidCommandArgumentException(
-            'The requested version $version does not exist');
+        throw InvalidCommandArgumentException('The requested version $version does not exist');
       }
       pathToPackage = pathTo;
     }
@@ -250,13 +242,12 @@ Run:
           /// dart allows a user to publish the override even though it should
           /// never be published and breaks build from cache if it exists.
           filter: (file) => basename(file) != 'pubspec_overrides.yaml');
-      await DartProject.fromPath(pathToTempPackage).warmup();
+      DartProject.fromPath(pathToTempPackage).warmup();
 
       final pubspec = PubSpec.load(directory: pathToTempPackage);
 
       for (final exe in pubspec.executables.list) {
-        final pathToOutput =
-            join(pathToTempPackage, dirname(exe.scriptPath), exe.name);
+        final pathToOutput = join(pathToTempPackage, dirname(exe.scriptPath), exe.name);
         print(green('Compiling ${exe.name}...'));
         DartSdk().runDartCompiler(
           DartScript.fromFile(join(pathToTempPackage, exe.scriptPath)),

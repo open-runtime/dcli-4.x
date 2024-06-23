@@ -38,3 +38,6 @@ dcli/tool/post_release_hook/.settings_yaml
 .idea/modules.xml
 .idea/vcs.xml
 *.xml
+/dcli_sdk/bin/dcli_internal
+/dcli_sdk/bin/dcli_internal_complete
+/dcli_sdk/bin/dcli_internal_install

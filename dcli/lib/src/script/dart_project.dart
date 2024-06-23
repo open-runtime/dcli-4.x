@@ -14,7 +14,7 @@ import 'package:pubspec_manager/pubspec_manager.dart';
 // Here simply to avoid conflicts with the old NamedLocks
 import 'package:runtime_named_locks/runtime_named_locks.dart';
 
-import '../../dcli.dart' hide NamedLock;
+import '../../dcli.dart';
 import '../../posix.dart';
 import '../version/version.g.dart';
 import 'pub_get.dart';

@@ -13,7 +13,7 @@ import 'package:dcli/dcli.dart';
 ///
 ///
 void main(List<String> args) {
-  print('hi');
+  print('Activating dcli from local source.');
   if (!Shell.current.isPrivilegedUser) {
     printerr(red(Shell.current.privilegesRequiredMessage('activate_local')));
     exit(1);

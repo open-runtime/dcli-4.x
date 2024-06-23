@@ -105,6 +105,9 @@ class InstallCommand extends Command {
       printerr(red('*' * 80));
       dcliExit(1);
     }
+
+    print("Should install dart");
+    print(_installDart);
     // install dart and dcli
     final dartWasInstalled = await shell.install(installDart: _installDart);
 
